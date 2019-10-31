@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 
 export const Container = styled.header`
-  /* color: #fff; */
+  color: #fff;
   display: flex;
   flex-direction: column;
   margin-bottom: 20px;
@@ -11,20 +11,32 @@ export const Container = styled.header`
 export const Actions = styled.div`
   align-items: center;
   display: flex;
+  flex-wrap: wrap;
   justify-content: space-between;
   margin-top: 40px;
 `;
 
 export const Inputs = styled.div`
-  display: flex;
   align-items: center;
+  display: flex;
+  flex-wrap: wrap;
+
+  button {
+    background-color: #f5f4f6;
+    border: 0;
+    border-radius: 5px 0 0 5px;
+    padding: 5px;
+  }
 
   input {
     margin-right: 5px;
   }
 
   #input-search {
+    border: 0;
+    border-radius: 0 5px 5px 0;
     margin-right: 10px;
+    padding: 6px;
   }
 
   #input-check {

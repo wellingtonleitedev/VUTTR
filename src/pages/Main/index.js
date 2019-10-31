@@ -13,7 +13,6 @@ export default function Main() {
 
   async function fetchTools() {
     const tools = await api.get('/tools');
-    console.log(tools);
     setTools([...tools.data]);
   }
 
