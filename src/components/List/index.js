@@ -16,7 +16,7 @@ export default function List({ tools }) {
       {tools.map(tool => (
         <Item key={tool.id}>
           <HeaderList className="header-list">
-            <a href="#">
+            <a href={tool.link} target="_blank">
               <h3>{tool.title}</h3>
             </a>
             <Button>
@@ -29,7 +29,9 @@ export default function List({ tools }) {
           </Description>
           <Tags>
             {tool.tags.map(tag => (
-              <Tag>#{tag}</Tag>
+              <Tag key={tag}>
+                <small>#{tag}</small>
+              </Tag>
             ))}
           </Tags>
         </Item>

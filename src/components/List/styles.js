@@ -32,11 +32,12 @@ export const Description = styled.div`
 export const Tags = styled.ul`
   align-items: center;
   display: flex;
+  flex-wrap: wrap;
 `;
 
 export const Tag = styled.li`
-  background-color: #f5f4f6;
-  border: 1px solid #ebeaed;
+  background-color: #ebeaed;
+  border: 1px solid #dedce1;
   border-radius: 5px;
   margin-right: 5px;
   padding: 5px;
