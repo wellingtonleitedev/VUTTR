@@ -16,7 +16,7 @@ export default function List({ tools }) {
       {tools.map(tool => (
         <Item key={tool.id}>
           <HeaderList className="header-list">
-            <a href={tool.link} target="_blank">
+            <a href={tool.link}>
               <h3>{tool.title}</h3>
             </a>
             <Button>

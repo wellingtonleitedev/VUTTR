@@ -1,7 +1,14 @@
 import React from 'react';
 import { FaPlus, FaSearch } from 'react-icons/fa';
-import { Container, Button, Actions, Inputs } from './styles';
-import { Modal } from '@material-ui/core';
+import {
+  Container,
+  Button,
+  Actions,
+  Inputs,
+  ModalContent,
+  Form,
+} from './styles';
+import Modal from '@material-ui/core/Modal';
 
 export default function Header() {
   const [open, setOpen] = React.useState(false);
@@ -42,12 +49,18 @@ export default function Header() {
         open={open}
         onClose={handleClose}
       >
-        <div>
-          <h2 id="simple-modal-title">Text in a modal</h2>
-          <p id="simple-modal-description">
-            Duis mollis, est non commodo luctus, nisi erat porttitor ligula.
-          </p>
-        </div>
+        <ModalContent>
+          <Form>
+            <label>Tool Name</label>
+            <input></input>
+            <label>Tool Link</label>
+            <input></input>
+            <label>Tool Tags</label>
+            <input></input>
+            <label>Tool Description</label>
+            <input></input>
+          </Form>
+        </ModalContent>
       </Modal>
     </Container>
   );
