@@ -73,6 +73,8 @@ export const ModalContent = styled.div`
   flex-direction: column;
   justify-content: center;
   margin-top: 250px;
+  margin-left: 20px;
+  margin-right: 20px;
 `;
 
 export const Form = styled.form`

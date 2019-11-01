@@ -6,20 +6,28 @@ import api from '../../services/api';
 
 export default function Main() {
   const [tools, setTools] = useState([]);
+  const [search, setSearch] = useState(undefined);
 
   useEffect(() => {
-    fetchTools();
-  }, []);
+    handleSearch();
+  }, [search]);
 
-  async function fetchTools() {
+  const fetchTools = async () => {
     const tools = await api.get('/tools');
     setTools([...tools.data]);
-  }
+  };
+
+  const handleSearch = async () => {
+    if (!search) return fetchTools();
+
+    const tools = await api.get(`/tools?q=${search}`);
+    setTools([...tools.data]);
+  };
 
   return (
     <Container>
       <Content>
-        <Header />
+        <Header value={search} onChange={e => setSearch(e.target.value)} />
         <List tools={tools}></List>
       </Content>
     </Container>

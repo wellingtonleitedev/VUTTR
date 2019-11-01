@@ -9,8 +9,7 @@ export const Global = createGlobalStyle`
   }
 
   body {
-    background-image: linear-gradient(to right top, #365df0, #0072f4, #0084f3, #0093ee, #00a0e6, #009ddf, #009ad9, #0097d2, #0085cb, #0072c2, #005eb6, #244aa8);
-    background-repeat: no-repeat;
+    background: linear-gradient(to right, #365df0, #0072f4, #0084f3, #0093ee, #00a0e6, #009ddf, #009ad9, #0097d2, #0085cb, #0072c2, #005eb6, #244aa8);
     font-family: 'Source Sans Pro', sans-serif;
   }
 

@@ -10,7 +10,7 @@ import {
 } from './styles';
 import Modal from '@material-ui/core/Modal';
 
-export default function Header() {
+export default function Header({ onChange, value }) {
   const [open, setOpen] = React.useState(false);
 
   const handleOpen = () => {
@@ -34,6 +34,8 @@ export default function Header() {
             id="input-search"
             type="text"
             placeholder="Type what you are looking for"
+            value={value}
+            onChange={onChange}
           />
           <input id="input-check" type="checkbox" />
           <label htmlFor="input-check">search in logs only</label>
@@ -43,12 +45,7 @@ export default function Header() {
           Add
         </Button>
       </Actions>
-      <Modal
-        aria-labelledby="simple-modal-title"
-        aria-describedby="simple-modal-description"
-        open={open}
-        onClose={handleClose}
-      >
+      <Modal open={open} onClose={handleClose}>
         <ModalContent>
           <Form>
             <label>Tool Name</label>
