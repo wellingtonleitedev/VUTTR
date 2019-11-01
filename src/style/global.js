@@ -28,10 +28,14 @@ export const Global = createGlobalStyle`
     cursor: pointer;
   }
 
-  input {
+  input, textarea {
     background-color: #F5F4F6;
     border: 1px solid #EBEAED;
     border-radius: 5px;
     padding: 5px;
+  }
+
+  textarea {
+    resize: none;
   }
 `;

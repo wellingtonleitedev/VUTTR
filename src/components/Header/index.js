@@ -1,26 +1,8 @@
 import React from 'react';
 import { FaPlus, FaSearch } from 'react-icons/fa';
-import {
-  Container,
-  Button,
-  Actions,
-  Inputs,
-  ModalContent,
-  Form,
-} from './styles';
-import Modal from '@material-ui/core/Modal';
+import { Container, Button, Actions, Inputs } from './styles';
 
-export default function Header({ onChange, value }) {
-  const [open, setOpen] = React.useState(false);
-
-  const handleOpen = () => {
-    setOpen(true);
-  };
-
-  const handleClose = () => {
-    setOpen(false);
-  };
-
+export default function Header({ onChange, onClick, value }) {
   return (
     <Container>
       <h1>VUTTR</h1>
@@ -40,25 +22,11 @@ export default function Header({ onChange, value }) {
           <input id="input-check" type="checkbox" />
           <label htmlFor="input-check">search in logs only</label>
         </Inputs>
-        <Button onClick={handleOpen}>
+        <Button onClick={onClick}>
           <FaPlus color="#FFF" size={13} />
           Add
         </Button>
       </Actions>
-      <Modal open={open} onClose={handleClose}>
-        <ModalContent>
-          <Form>
-            <label>Tool Name</label>
-            <input></input>
-            <label>Tool Link</label>
-            <input></input>
-            <label>Tool Tags</label>
-            <input></input>
-            <label>Tool Description</label>
-            <input></input>
-          </Form>
-        </ModalContent>
-      </Modal>
     </Container>
   );
 }

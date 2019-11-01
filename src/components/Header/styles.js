@@ -67,26 +67,6 @@ export const Inputs = styled.div`
   }
 `;
 
-export const ModalContent = styled.div`
-  align-items: center;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  margin-top: 250px;
-  margin-left: 20px;
-  margin-right: 20px;
-`;
-
-export const Form = styled.form`
-  background-color: #fff;
-  border-radius: 5px;
-  display: flex;
-  flex-direction: column;
-  max-width: 600px;
-  padding: 20px;
-  width: 100%;
-`;
-
 export const Button = styled.button`
   align-items: center;
   background-color: #365df0;
