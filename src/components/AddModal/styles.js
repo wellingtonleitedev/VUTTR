@@ -4,9 +4,10 @@ export const ModalContainer = styled.div`
   align-items: center;
   display: flex;
   flex-direction: column;
-  margin-top: 250px;
+  justify-content: center;
   margin-left: 20px;
   margin-right: 20px;
+  height: 100%;
 `;
 
 export const ModalContent = styled.div`
@@ -45,16 +46,14 @@ export const Form = styled.form`
     padding: 10px;
   }
 `;
-
-export const Button = styled.button`
-  align-items: center;
-  background-color: #365df0;
-  color: #fff;
+export const Actions = styled.div`
+  align-items: flex-end;
   display: flex;
-  letter-spacing: 0.36px;
-  padding: 5px 10px;
+  justify-content: flex-end;
 
-  svg {
-    margin-right: 5px;
+  button {
+    &:first-child {
+      background-color: #f95e5a;
+    }
   }
 `;
