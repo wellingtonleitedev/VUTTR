@@ -4,14 +4,16 @@ import {
   ModalContent,
   ModalHeader,
   Form,
-  Button,
+  Actions,
 } from './styles';
 import { FaPlus } from 'react-icons/fa';
 import api from '../../services/api';
 import Modal from '@material-ui/core/Modal';
+import { ConfirmButton } from '../ConfirmButton';
+import { CancelButton } from '../CancelButton';
 
 export default function AddModal({ open, onClose }) {
-  const [name, setName] = useState(undefined);
+  const [title, setTitle] = useState(undefined);
   const [link, setLink] = useState(undefined);
   const [description, setDescription] = useState(undefined);
   const [tags, setTags] = useState([]);
@@ -19,13 +21,11 @@ export default function AddModal({ open, onClose }) {
   const handleSubmit = async e => {
     e.preventDefault();
 
-    const tool = { name, link, description, tags };
+    const tool = { title, link, description, tags: [tags] };
 
-    try {
-      await api.post('/tools', tool);
-    } catch (err) {
-      console.log(err);
-    }
+    await api.post('/tools', tool);
+
+    onClose();
   };
 
   return (
@@ -36,12 +36,12 @@ export default function AddModal({ open, onClose }) {
             <FaPlus color="#365df0" size={15} />
             <h3>Add new tool</h3>
           </ModalHeader>
-          <Form onSubmit={() => handleSubmit()}>
+          <Form onSubmit={handleSubmit}>
             <label>Tool Name</label>
             <input
               type="text"
-              value={name}
-              onChange={e => setName(e.target.value)}
+              value={title}
+              onChange={e => setTitle(e.target.value)}
             />
             <label>Tool Link</label>
             <input
@@ -57,7 +57,10 @@ export default function AddModal({ open, onClose }) {
             ></textarea>
             <label>Tool Tags</label>
             <input value={tags} onChange={e => setTags(e.target.value)} />
-            <Button type="submit">Confirmar</Button>
+            <Actions>
+              <CancelButton onClick={() => onClose()}>Cancelar</CancelButton>
+              <ConfirmButton type="submit">Confirmar</ConfirmButton>
+            </Actions>
           </Form>
         </ModalContent>
       </ModalContainer>

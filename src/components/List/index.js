@@ -1,16 +1,9 @@
 import React from 'react';
 import { FaTimes } from 'react-icons/fa';
-import {
-  Container,
-  Item,
-  HeaderList,
-  Description,
-  Tags,
-  Tag,
-  Button,
-} from './styles';
+import { Container, Item, HeaderList, Description, Tags, Tag } from './styles';
+import { IconButton } from '../IconButton';
 
-export default function List({ tools }) {
+export const List = ({ tools, onClick }) => {
   return (
     <Container>
       {tools.map(tool => (
@@ -19,10 +12,13 @@ export default function List({ tools }) {
             <a href={tool.link}>
               <h3>{tool.title}</h3>
             </a>
-            <Button>
-              <FaTimes color="#FFF" size={13} />
+            <IconButton
+              onClick={() => onClick(tool.id)}
+              color="#f95e5a"
+              icon={<FaTimes color="#FFF" size={13} />}
+            >
               Remove
-            </Button>
+            </IconButton>
           </HeaderList>
           <Description>
             <p>{tool.description}</p>
@@ -38,4 +34,4 @@ export default function List({ tools }) {
       ))}
     </Container>
   );
-}
+};

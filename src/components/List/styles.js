@@ -42,16 +42,3 @@ export const Tag = styled.li`
   margin-right: 5px;
   padding: 5px;
 `;
-
-export const Button = styled.button`
-  align-items: center;
-  background-color: #f95e5a;
-  color: #fff;
-  display: flex;
-  letter-spacing: 0.36px;
-  padding: 5px 10px;
-
-  svg {
-    margin-right: 2px;
-  }
-`;
