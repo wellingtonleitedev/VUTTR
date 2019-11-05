@@ -9,7 +9,7 @@ export const Global = createGlobalStyle`
   }
 
   body {
-    /* background-image: linear-gradient(to bottom, #365df0, #4a5ae4, #5658d7, #5f56cc, #6554c0); */
+    background: linear-gradient(to right, #365df0, #0072f4, #0084f3, #0093ee, #00a0e6, #009ddf, #009ad9, #0097d2, #0085cb, #0072c2, #005eb6, #244aa8);
     font-family: 'Source Sans Pro', sans-serif;
   }
 
@@ -28,10 +28,14 @@ export const Global = createGlobalStyle`
     cursor: pointer;
   }
 
-  input {
+  input, textarea {
     background-color: #F5F4F6;
     border: 1px solid #EBEAED;
     border-radius: 5px;
     padding: 5px;
+  }
+
+  textarea {
+    resize: none;
   }
 `;
