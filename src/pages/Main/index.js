@@ -4,6 +4,7 @@ import AddModal from '../../components/AddModal';
 import { Header } from '../../components/Header';
 import { List } from '../../components/List';
 import api from '../../services/api';
+import { Modal } from '../../components/Modal';
 
 export default function Main() {
   const [tools, setTools] = useState([]);
@@ -59,6 +60,7 @@ export default function Main() {
         <List tools={tools} onClick={item => handleRemove(item)}></List>
       </Content>
       <AddModal open={open} onClose={handleClose} />
+      <Modal />
     </Container>
   );
 }
