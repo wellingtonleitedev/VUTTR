@@ -1,12 +1,12 @@
 import styled from 'styled-components';
 
-export const Container = styled.div`
+export const Overlay = styled.div`
   align-items: center;
-  background-color: rgba(0, 0, 0, 0.3);
-  display: flex;
+  background-color: rgba(0, 0, 0, 0.8);
+  display: ${props => (props.modalOpen ? 'flex' : 'none')};
   flex-direction: column;
   justify-content: center;
-  position: absolute;
+  position: fixed;
   bottom: 0;
   left: 0;
   right: 0;

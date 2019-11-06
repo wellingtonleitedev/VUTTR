@@ -1,6 +1,5 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { Container, Content } from './styles';
-import AddModal from '../../components/AddModal';
 import { Header } from '../../components/Header';
 import { List } from '../../components/List';
 import api from '../../services/api';
@@ -16,11 +15,11 @@ export default function Main() {
     handleSearch();
   }, [search]);
 
-  const handleOpen = () => {
+  const handleOpen = async () => {
     setOpen(true);
   };
 
-  const handleClose = () => {
+  const handleClose = event => {
     setOpen(false);
   };
 
@@ -59,8 +58,7 @@ export default function Main() {
         />
         <List tools={tools} onClick={item => handleRemove(item)}></List>
       </Content>
-      <AddModal open={open} onClose={handleClose} />
-      <Modal />
+      <Modal open={open} onClose={handleClose} />
     </Container>
   );
 }
