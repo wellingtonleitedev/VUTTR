@@ -29,7 +29,6 @@ export function Modal({ open, onClose }) {
     const cancel = actionsRef.current.children[0].contains(event.target);
     const confirm = actionsRef.current.children[1].contains(event.target);
 
-    console.log(cancel);
     if (!content || cancel || confirm) {
       setSituation(false);
       onClose();
