@@ -5,6 +5,7 @@ import { List } from '../../components/List';
 import api from '../../services/api';
 import { Modal } from '../../components/Modal';
 import { toast } from 'react-toastify';
+import { ToastContentSucess } from '../../components/ToastContentSucess';
 
 export default function Main() {
   const [tools, setTools] = useState([]);
@@ -26,7 +27,11 @@ export default function Main() {
   const handleRemove = async tool => {
     await api.delete(`/tools/${tool.id}`);
     fetchTools();
-    toast.success(`${tool.title} foi removido com sucesso!`);
+    toast.success(
+      <ToastContentSucess>
+        {tool.title} foi removido com sucesso!
+      </ToastContentSucess>
+    );
   };
 
   const fetchTools = async () => {

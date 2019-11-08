@@ -39,4 +39,8 @@ export const Global = createGlobalStyle`
   textarea {
     resize: none;
   }
+
+  .toast-container div {
+    border-radius: 5px !important;
+  }
 `;

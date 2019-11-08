@@ -5,6 +5,7 @@ import { ConfirmButton } from '../ConfirmButton';
 import { FaPlus } from 'react-icons/fa';
 import api from '../../services/api';
 import { toast } from 'react-toastify';
+import { ToastContentSucess } from '../ToastContentSucess';
 
 export function Modal({ open, onClose }) {
   const modalRef = useRef(null);
@@ -38,7 +39,6 @@ export function Modal({ open, onClose }) {
   const handleSubmit = async e => {
     e.preventDefault();
 
-    console.log(tool);
     const { title, link, description, tags } = tool;
 
     if (!title || !link || !description || !tags.length) return;
@@ -48,7 +48,11 @@ export function Modal({ open, onClose }) {
     setSituation(false);
     onClose();
 
-    toast.success(`${title} foi adicionado com sucesso!`);
+    toast.success(
+      <ToastContentSucess>
+        {title} foi adicionado com sucesso!
+      </ToastContentSucess>
+    );
     setTool({});
   };
 

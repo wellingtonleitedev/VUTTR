@@ -9,7 +9,7 @@ function App() {
     <Fragment>
       <Global />
       <Routes />
-      <ToastContainer />
+      <ToastContainer className="toast-container" />
     </Fragment>
   );
 }
