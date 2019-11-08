@@ -5,7 +5,8 @@ import { ConfirmButton } from '../ConfirmButton';
 import { FaPlus } from 'react-icons/fa';
 import api from '../../services/api';
 import { toast } from 'react-toastify';
-import { ToastContentSucess } from '../ToastContentSucess';
+import { ToastContentSuccess } from '../ToastContentSuccess';
+import { ToastContentError } from '../ToastContentError';
 
 export function Modal({ open, onClose }) {
   const modalRef = useRef(null);
@@ -41,7 +42,13 @@ export function Modal({ open, onClose }) {
 
     const { title, link, description, tags } = tool;
 
-    if (!title || !link || !description || !tags.length) return;
+    if (!title || !link || !description || !tags.length) {
+      return toast.error(
+        <ToastContentError>
+          You need to fill in all the fields!
+        </ToastContentError>
+      );
+    }
 
     await api.post('/tools', tool);
 
@@ -49,9 +56,9 @@ export function Modal({ open, onClose }) {
     onClose();
 
     toast.success(
-      <ToastContentSucess>
-        {title} foi adicionado com sucesso!
-      </ToastContentSucess>
+      <ToastContentSuccess>
+        {title} has been successfully added!
+      </ToastContentSuccess>
     );
     setTool({});
   };
@@ -80,10 +87,7 @@ export function Modal({ open, onClose }) {
             onChange={e => setTool({ ...tool, description: e.target.value })}
           ></textarea>
           <label>Tool Tags</label>
-          <input
-            multiple
-            onChange={e => setTool({ ...tool, tags: [e.target.value] })}
-          />
+          <input onChange={e => setTool({ ...tool, tags: [e.target.value] })} />
           <Actions ref={actionsRef}>
             <CancelButton onClick={() => handleClose()}>Cancelar</CancelButton>
             <ConfirmButton type="submit">Confirmar</ConfirmButton>
