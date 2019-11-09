@@ -7,7 +7,6 @@ export const Container = styled.div`
 `;
 
 export const Figure = styled.div`
-  margin-right: 15px;
   height: 20px;
   width: 20px;
 `;
@@ -17,6 +16,7 @@ export const Description = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
+  width: 80%;
 `;
 
 export const Title = styled.h4`
