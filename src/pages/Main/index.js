@@ -4,28 +4,34 @@ import { Header } from '../../components/Header';
 import { List } from '../../components/List';
 import api from '../../services/api';
 import { Modal } from '../../components/Modal';
+import { toast } from 'react-toastify';
+import { ToastContentSuccess } from '../../components/ToastContentSuccess';
 
 export default function Main() {
   const [tools, setTools] = useState([]);
-  const [search, setSearch] = useState(undefined);
   const [checked, setChecked] = useState(false);
   const [open, setOpen] = React.useState(false);
 
   useEffect(() => {
-    handleSearch();
-  }, [search]);
+    fetchTools();
+  }, []);
 
   const handleOpen = async () => {
     setOpen(true);
   };
 
-  const handleClose = event => {
+  const handleClose = () => {
     setOpen(false);
   };
 
-  const handleRemove = async id => {
-    await api.delete(`/tools/${id}`);
+  const handleRemove = async tool => {
+    await api.delete(`/tools/${tool.id}`);
     fetchTools();
+    toast.success(
+      <ToastContentSuccess>
+        {tool.title} has been successfully removed!
+      </ToastContentSuccess>
+    );
   };
 
   const fetchTools = async () => {
@@ -33,7 +39,7 @@ export default function Main() {
     setTools([...tools.data]);
   };
 
-  const handleSearch = async () => {
+  const handleSearch = async search => {
     if (!search) return fetchTools();
     let tools = undefined;
 
@@ -50,15 +56,14 @@ export default function Main() {
     <Container>
       <Content>
         <Header
-          value={search}
           checked={checked}
           onChecked={() => setChecked(!checked)}
-          onChange={e => setSearch(e.target.value)}
+          onChange={e => handleSearch(e.target.value)}
           onClick={handleOpen}
         />
         <List tools={tools} onClick={item => handleRemove(item)}></List>
       </Content>
-      <Modal open={open} onClose={handleClose} />
+      <Modal open={open} onClose={() => handleClose()} />
     </Container>
   );
 }

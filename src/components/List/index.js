@@ -13,7 +13,7 @@ export const List = ({ tools, onClick }) => {
               <h3>{tool.title}</h3>
             </a>
             <IconButton
-              onClick={() => onClick(tool.id)}
+              onClick={() => onClick(tool)}
               color="#f95e5a"
               icon={<FaTimes color="#FFF" size={13} />}
             >

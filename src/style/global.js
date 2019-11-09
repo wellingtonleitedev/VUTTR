@@ -39,4 +39,14 @@ export const Global = createGlobalStyle`
   textarea {
     resize: none;
   }
+
+  .img-responsive {
+    max-width: 100%;
+    height: auto;
+  }
+
+  .toast-container > div {
+    border-radius: 5px !important;
+    padding: 15px;
+  }
 `;

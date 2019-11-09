@@ -4,15 +4,16 @@ import { CancelButton } from '../CancelButton';
 import { ConfirmButton } from '../ConfirmButton';
 import { FaPlus } from 'react-icons/fa';
 import api from '../../services/api';
+import { toast } from 'react-toastify';
+import { ToastContentSuccess } from '../ToastContentSuccess';
+import { ToastContentError } from '../ToastContentError';
 
 export function Modal({ open, onClose }) {
   const modalRef = useRef(null);
   const overlayRef = useRef(null);
   const actionsRef = useRef(null);
-  const [title, setTitle] = useState(undefined);
-  const [link, setLink] = useState(undefined);
-  const [description, setDescription] = useState(undefined);
-  const [tags, setTags] = useState([]);
+  const [tool, setTool] = useState({});
+
   const [situation, setSituation] = useState(open);
 
   useEffect(() => {
@@ -39,14 +40,27 @@ export function Modal({ open, onClose }) {
   const handleSubmit = async e => {
     e.preventDefault();
 
-    const tool = { title, link, description, tags: [tags] };
+    const { title, link, description, tags } = tool;
 
-    if (!title || !link || !description || !tags) return;
+    if (!title || !link || !description || !tags.length) {
+      return toast.error(
+        <ToastContentError>
+          You need to fill in all the fields!
+        </ToastContentError>
+      );
+    }
 
     await api.post('/tools', tool);
 
     setSituation(false);
     onClose();
+
+    toast.success(
+      <ToastContentSuccess>
+        {title} has been successfully added!
+      </ToastContentSuccess>
+    );
+    setTool({});
   };
 
   return (
@@ -60,23 +74,20 @@ export function Modal({ open, onClose }) {
           <label>Tool Name</label>
           <input
             type="text"
-            value={title}
-            onChange={e => setTitle(e.target.value)}
+            onChange={e => setTool({ ...tool, title: e.target.value })}
           />
           <label>Tool Link</label>
           <input
             type="text"
-            value={link}
-            onChange={e => setLink(e.target.value)}
+            onChange={e => setTool({ ...tool, link: e.target.value })}
           />
           <label>Tool Description</label>
           <textarea
             rows="5"
-            value={description}
-            onChange={e => setDescription(e.target.value)}
+            onChange={e => setTool({ ...tool, description: e.target.value })}
           ></textarea>
           <label>Tool Tags</label>
-          <input value={tags} onChange={e => setTags(e.target.value)} />
+          <input onChange={e => setTool({ ...tool, tags: [e.target.value] })} />
           <Actions ref={actionsRef}>
             <CancelButton onClick={() => handleClose()}>Cancelar</CancelButton>
             <ConfirmButton type="submit">Confirmar</ConfirmButton>
