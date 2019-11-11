@@ -7,12 +7,14 @@ import api from '../../services/api';
 import { toast } from 'react-toastify';
 import { ToastContentSuccess } from '../ToastContentSuccess';
 import { ToastContentError } from '../ToastContentError';
+import { InputTags } from '../InputTags';
 
 export function Modal({ open, onClose }) {
   const modalRef = useRef(null);
   const overlayRef = useRef(null);
   const actionsRef = useRef(null);
-  const [tool, setTool] = useState({});
+  const inputRef = useRef(null);
+  const [tool, setTool] = useState({ tags: [] });
 
   const [situation, setSituation] = useState(open);
 
@@ -35,6 +37,30 @@ export function Modal({ open, onClose }) {
       onClose();
       overlayRef.current.removeEventListener('click', handleClose);
     }
+  };
+
+  const pushTags = value => {
+    let tag = undefined;
+    const tags = [];
+
+    if (value.match(/^[,]/g) || value.match(/^[ ]/g)) {
+      inputRef.current.value = '';
+      return;
+    }
+
+    if (value.match(/[,]/g) || value.match(/[ ]/g)) {
+      tag = value.replace(' ', '');
+      tag = value.replace(',', '');
+
+      inputRef.current.value = '';
+      tags.push(tag);
+      setTool({ ...tool, tags: [...tool.tags, ...tags] });
+    }
+  };
+
+  const removeTag = tag => {
+    console.log(tag);
+    // const index = tags.filter(t => t)
   };
 
   const handleSubmit = async e => {
@@ -60,7 +86,7 @@ export function Modal({ open, onClose }) {
         {title} has been successfully added!
       </ToastContentSuccess>
     );
-    setTool({});
+    setTool({ tags: [] });
   };
 
   return (
@@ -87,9 +113,16 @@ export function Modal({ open, onClose }) {
             onChange={e => setTool({ ...tool, description: e.target.value })}
           ></textarea>
           <label>Tool Tags</label>
-          <input onChange={e => setTool({ ...tool, tags: [e.target.value] })} />
+          <InputTags
+            inputRef={inputRef}
+            tags={tool.tags}
+            onChange={text => pushTags(text)}
+            onClick={() => console.log('teste')}
+          />
           <Actions ref={actionsRef}>
-            <CancelButton onClick={() => handleClose()}>Cancelar</CancelButton>
+            <CancelButton type="button" onClick={() => handleClose()}>
+              Cancelar
+            </CancelButton>
             <ConfirmButton type="submit">Confirmar</ConfirmButton>
           </Actions>
         </Form>
