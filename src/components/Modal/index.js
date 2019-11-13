@@ -10,9 +10,6 @@ import { ToastContentError } from '../ToastContentError';
 import { InputTags } from '../InputTags';
 
 export function Modal({ open, onClose }) {
-  const modalRef = useRef(null);
-  const overlayRef = useRef(null);
-  const actionsRef = useRef(null);
   const inputRef = useRef(null);
   const [tool, setTool] = useState({ tags: [] });
 
@@ -20,28 +17,20 @@ export function Modal({ open, onClose }) {
 
   useEffect(() => {
     if (open) {
-      overlayRef.current.addEventListener('click', handleClose);
       setSituation(open);
     }
   }, [open]);
 
   const handleClose = event => {
-    event.stopPropagation();
+    event.preventDefault();
 
-    const content = modalRef.current.contains(event.target);
-    const cancel = actionsRef.current.children[0].contains(event.target);
-    const confirm = actionsRef.current.children[1].contains(event.target);
-
-    if (!content || cancel || confirm) {
-      setSituation(false);
-      onClose();
-      overlayRef.current.removeEventListener('click', handleClose);
-    }
+    setSituation(false);
+    onClose();
+    setTool({ tags: [] });
   };
 
   const pushTags = value => {
     let tag = undefined;
-    const tags = [];
 
     if (value.match(/^[,]/g) || value.match(/^[ ]/g)) {
       inputRef.current.value = '';
@@ -50,17 +39,29 @@ export function Modal({ open, onClose }) {
 
     if (value.match(/[,]/g) || value.match(/[ ]/g)) {
       tag = value.replace(' ', '');
-      tag = value.replace(',', '');
+      tag = tag.replace(',', '');
 
       inputRef.current.value = '';
-      tags.push(tag);
-      setTool({ ...tool, tags: [...tool.tags, ...tags] });
+      setTool({ ...tool, tags: [...tool.tags, tag] });
     }
   };
 
-  const removeTag = tag => {
-    console.log(tag);
-    // const index = tags.filter(t => t)
+  const handleRemoveForEvent = event => {
+    const tags = tool.tags;
+
+    if (!inputRef.current.value && event.key === 'Backspace') {
+      tags.pop();
+    }
+
+    setTool({ ...tool, tags });
+  };
+
+  const handleRemove = index => {
+    const tags = tool.tags;
+
+    tags.splice(index, 1);
+
+    setTool({ ...tool, tags });
   };
 
   const handleSubmit = async e => {
@@ -69,34 +70,35 @@ export function Modal({ open, onClose }) {
     const { title, link, description, tags } = tool;
 
     if (!title || !link || !description || !tags.length) {
-      return toast.error(
+      toast.error(
         <ToastContentError>
           You need to fill in all the fields!
         </ToastContentError>
       );
-    }
+    } else {
+      await api.post('/tools', tool);
 
-    await api.post('/tools', tool);
+      toast.success(
+        <ToastContentSuccess>
+          {title} has been successfully added!
+        </ToastContentSuccess>
+      );
+    }
 
     setSituation(false);
     onClose();
 
-    toast.success(
-      <ToastContentSuccess>
-        {title} has been successfully added!
-      </ToastContentSuccess>
-    );
     setTool({ tags: [] });
   };
 
   return (
-    <Overlay ref={overlayRef} modalOpen={situation}>
-      <Content ref={modalRef}>
+    <Overlay modalOpen={situation}>
+      <Content>
         <ModalHeader>
           <FaPlus color="#365df0" size={15} />
           <h3>Add new tool</h3>
         </ModalHeader>
-        <Form onSubmit={handleSubmit}>
+        <Form>
           <label>Tool Name</label>
           <input
             type="text"
@@ -116,14 +118,17 @@ export function Modal({ open, onClose }) {
           <InputTags
             inputRef={inputRef}
             tags={tool.tags}
+            onKeyDown={event => handleRemoveForEvent(event)}
             onChange={text => pushTags(text)}
-            onClick={() => console.log('teste')}
+            onClick={index => handleRemove(index)}
           />
-          <Actions ref={actionsRef}>
-            <CancelButton type="button" onClick={() => handleClose()}>
+          <Actions>
+            <CancelButton type="button" onClick={handleClose}>
               Cancelar
             </CancelButton>
-            <ConfirmButton type="submit">Confirmar</ConfirmButton>
+            <ConfirmButton type="submit" onClick={handleSubmit}>
+              Confirmar
+            </ConfirmButton>
           </Actions>
         </Form>
       </Content>
