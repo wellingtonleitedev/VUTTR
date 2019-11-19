@@ -1,33 +1,23 @@
 import React, { useEffect } from 'react';
 import { FaTimes } from 'react-icons/fa';
-import { toast } from 'react-toastify';
 import { useDispatch, useSelector } from 'react-redux';
 import { Container, Item, HeaderList, Description, Tags, Tag } from './styles';
-import { IconButton, ToastContentSuccess } from '../';
-import api from '../../services/api';
+import { IconButton } from '../';
+import {
+  fetchToolsRequest,
+  removeToolRequest,
+} from '../../store/modules/tools/actions';
 
 export function List() {
   const tools = useSelector(state => state.tools.data);
   const dispatch = useDispatch();
 
   useEffect(() => {
-    fetchTools();
+    dispatch(fetchToolsRequest());
   }, []);
 
-  const fetchTools = async () => {
-    const { data } = await api.get('/tools');
-    dispatch({ type: 'REQUEST_TOOLS', payload: data });
-  };
-
-  const handleRemove = async tool => {
-    await api.delete(`/tools/${tool.id}`);
-    fetchTools();
-
-    toast.success(
-      <ToastContentSuccess>
-        {tool.title} has been successfully removed!
-      </ToastContentSuccess>
-    );
+  const handleRemove = tool => {
+    dispatch(removeToolRequest(tool));
   };
 
   return (

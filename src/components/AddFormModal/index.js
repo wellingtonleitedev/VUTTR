@@ -1,17 +1,9 @@
 import React, { useState, useRef, useMemo } from 'react';
 import { ModalHeader, Form, Actions } from './styles';
-import {
-  CancelButton,
-  ConfirmButton,
-  InputTags,
-  Modal,
-  ToastContentError,
-  ToastContentSuccess,
-} from '../';
+import { CancelButton, ConfirmButton, InputTags, Modal } from '../';
 import { useDispatch } from 'react-redux';
 import { FaPlus } from 'react-icons/fa';
-import { toast } from 'react-toastify';
-import api from '../../services/api';
+import { addToolRequest } from '../../store/modules/tools/actions';
 
 export default function AddFormModal({ open, onClose }) {
   const formRef = useRef(null);
@@ -23,45 +15,21 @@ export default function AddFormModal({ open, onClose }) {
     setSituation(open);
   }, [open]);
 
-  const cleanForm = () => {
-    console.log(formRef.current);
-  };
-
   const handleModal = e => {
     e.preventDefault();
 
     setSituation(!open);
     onClose();
-
-    cleanForm();
   };
 
   const handleSubmit = async e => {
     e.preventDefault();
 
-    const { title, link, description, tags } = tool;
-
-    if (!title || !link || !description || !tags.length) {
-      toast.error(
-        <ToastContentError>
-          You need to fill in all the fields!
-        </ToastContentError>
-      );
-    } else {
-      const { data } = await api.post('/tools', tool);
-      dispatch({ type: 'ADD_TOOLS', payload: data });
-
-      toast.success(
-        <ToastContentSuccess>
-          {title} has been successfully added!
-        </ToastContentSuccess>
-      );
-    }
+    dispatch(addToolRequest(tool));
 
     setTool({});
     setSituation(false);
     onClose();
-    cleanForm();
   };
 
   return (
@@ -93,9 +61,7 @@ export default function AddFormModal({ open, onClose }) {
           onChange={e => setTool({ ...tool, description: e.target.value })}
         ></textarea>
         <label>Tool Tags</label>
-        <InputTags
-          onChange={text => setTool({ ...tool, ...tool.tags, tags: text })}
-        />
+        <InputTags onChange={text => setTool({ ...tool, tags: text })} />
         <Actions>
           <CancelButton type="button" onClick={handleModal}>
             Cancelar

@@ -4,7 +4,7 @@ export function fetchToolsRequest() {
   };
 }
 
-export function fetchToolsSuccess() {
+export function fetchToolsSuccess(tool) {
   return {
     type: '@tool/FETCH_SUCCESS',
     tool,
@@ -25,9 +25,16 @@ export function addToolSuccess(tool) {
   };
 }
 
-export function removeToolRequest(id) {
+export function removeToolRequest(tool) {
   return {
     type: '@tool/REMOVE_REQUEST',
+    tool,
+  };
+}
+
+export function removeToolSuccess(id) {
+  return {
+    type: '@tool/REMOVE_SUCCESS',
     id,
   };
 }
