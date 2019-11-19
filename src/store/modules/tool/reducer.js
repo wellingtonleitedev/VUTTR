@@ -1,10 +1,8 @@
-const INITIAL_STATE = {
-  data: [],
-};
+import { produce } from 'immer';
 
-export default function tools(state = INITIAL_STATE, action) {
+export default function tools(state = [], action) {
   switch (action.type) {
-    case 'REQUEST_TOOLS':
+    case '@tool/FETCH_SUCCESS':
       return {
         ...state,
         data: action.payload,
@@ -14,7 +12,7 @@ export default function tools(state = INITIAL_STATE, action) {
         ...state,
         data: action.payload,
       };
-    case 'ADD_TOOLS':
+    case '@tool/ADD_SUCCESS':
       return {
         ...state,
         data: [...state.data, action.payload],
