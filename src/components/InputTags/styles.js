@@ -36,8 +36,8 @@ export const Tag = styled.li`
 
   button {
     background: transparent;
-    margin: 0;
-    padding: 0;
+    margin: 0 !important;
+    padding: 0 !important;
 
     svg {
       margin-left: 5px;

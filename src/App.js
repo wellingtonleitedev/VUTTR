@@ -1,16 +1,18 @@
-import React, { Fragment } from 'react';
+import React from 'react';
 import Routes from './routes';
 import { Global } from './style/global';
+import { Provider } from 'react-redux';
+import store from './store';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
 function App() {
   return (
-    <Fragment>
+    <Provider store={store}>
       <Global />
       <Routes />
       <ToastContainer className="toast-container" />
-    </Fragment>
+    </Provider>
   );
 }
 
