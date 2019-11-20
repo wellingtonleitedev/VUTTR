@@ -1,24 +1,20 @@
+import { produce } from 'immer';
+
 const INITIAL_STATE = {
   data: [],
 };
 
 export default function tools(state = INITIAL_STATE, action) {
   switch (action.type) {
-    case 'REQUEST_TOOLS':
-      return {
-        ...state,
-        data: action.payload,
-      };
-    case 'SEARCH_TOOLS':
-      return {
-        ...state,
-        data: action.payload,
-      };
-    case 'ADD_TOOLS':
-      return {
-        ...state,
-        data: [...state.data, action.payload],
-      };
+    case '@tool/FETCH_SUCCESS':
+      return produce(state, draft => {
+        draft.data = action.tool;
+      });
+    case '@tool/ADD_SUCCESS':
+      return produce(state, draft => {
+        console.log(action);
+        draft.data.push(action.tool);
+      });
     default:
       return { ...state };
   }
