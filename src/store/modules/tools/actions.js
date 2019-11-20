@@ -11,6 +11,14 @@ export function fetchToolsSuccess(tool) {
   };
 }
 
+export function searchToolsRequest(text, checked) {
+  return {
+    type: '@tool/SEARCH_REQUEST',
+    text,
+    checked,
+  };
+}
+
 export function addToolRequest(tool) {
   return {
     type: '@tool/ADD_REQUEST',

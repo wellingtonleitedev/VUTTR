@@ -1,6 +1,6 @@
 import React, { useState, useRef, useMemo } from 'react';
 import { ModalHeader, Form, Actions } from './styles';
-import { CancelButton, ConfirmButton, InputTags, Modal } from '../';
+import { ConfirmButton, InputTags, Modal } from '../';
 import { useDispatch } from 'react-redux';
 import { FaPlus } from 'react-icons/fa';
 import { addToolRequest } from '../../store/modules/tools/actions';
@@ -8,27 +8,21 @@ import { addToolRequest } from '../../store/modules/tools/actions';
 export default function AddFormModal({ open, onClose }) {
   const formRef = useRef(null);
   const dispatch = useDispatch();
-  const [tool, setTool] = useState({});
+  const [tool, setTool] = useState({ tags: [] });
   const [situation, setSituation] = useState(open);
 
   useMemo(() => {
     setSituation(open);
   }, [open]);
 
-  const handleModal = e => {
-    e.preventDefault();
-
-    setSituation(!open);
-    onClose();
-  };
-
   const handleSubmit = async e => {
     e.preventDefault();
 
     dispatch(addToolRequest(tool));
 
-    setTool({});
-    setSituation(false);
+    formRef.current.reset();
+
+    setTool({ tags: [] });
     onClose();
   };
 
@@ -43,10 +37,9 @@ export default function AddFormModal({ open, onClose }) {
         </ModalHeader>
       }
     >
-      <Form ref={formRef}>
+      <Form onSubmit={handleSubmit} ref={formRef}>
         <label>Tool Name</label>
         <input
-          value={tool.title}
           type="text"
           onChange={e => setTool({ ...tool, title: e.target.value })}
         />
@@ -63,12 +56,7 @@ export default function AddFormModal({ open, onClose }) {
         <label>Tool Tags</label>
         <InputTags onChange={text => setTool({ ...tool, tags: text })} />
         <Actions>
-          <CancelButton type="button" onClick={handleModal}>
-            Cancelar
-          </CancelButton>
-          <ConfirmButton type="submit" onClick={handleSubmit}>
-            Confirmar
-          </ConfirmButton>
+          <ConfirmButton type="submit">Add Tool</ConfirmButton>
         </Actions>
       </Form>
     </Modal>

@@ -10,18 +10,10 @@ export default function tools(state = INITIAL_STATE, action) {
       return produce(state, draft => {
         draft.data = action.tool;
       });
-    case 'SEARCH_TOOLS':
-      return produce(state, draft => {
-        draft.data = action.tool;
-      });
     case '@tool/ADD_SUCCESS':
       return produce(state, draft => {
         console.log(action);
-        draft.data = draft.data.push(action.tool);
-      });
-    case '@tool/REMOVE_SUCCESS':
-      return produce(state, draft => {
-        draft.data = action.tool;
+        draft.data.push(action.tool);
       });
     default:
       return { ...state };
