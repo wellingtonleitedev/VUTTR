@@ -11,11 +11,12 @@ export const IconButton = ({ onClick, color, icon, children }) => (
 
 IconButton.defaultProps = {
   color: '#365df0',
+  children: '',
 };
 
 IconButton.propTypes = {
   onClick: PropTypes.func.isRequired,
   color: PropTypes.string,
   icon: PropTypes.element.isRequired,
-  children: PropTypes.string.isRequired,
+  children: PropTypes.string,
 };

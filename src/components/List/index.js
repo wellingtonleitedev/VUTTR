@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import { FaTimes } from 'react-icons/fa';
 import { useDispatch, useSelector } from 'react-redux';
 import { Container, Item, HeaderList, Description, Tags, Tag } from './styles';
-import { IconButton } from '../IconButton';
+import { IconButton } from '..';
 import {
   fetchToolsRequest,
   removeToolRequest,

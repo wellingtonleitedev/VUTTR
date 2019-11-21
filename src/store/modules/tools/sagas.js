@@ -1,9 +1,7 @@
-import React from 'react';
 import { call, put, select } from 'redux-saga/effects';
+import { toastSuccess, toastError } from '../../../helpers';
 import api from '../../../services/api';
 import { fetchToolsSuccess, addToolSuccess } from './actions';
-import { toast } from 'react-toastify';
-import { ToastContentError, ToastContentSuccess } from '../../../components';
 
 export function* fetchTools() {
   const { data } = yield call(api.get, '/tools');
@@ -12,7 +10,7 @@ export function* fetchTools() {
 }
 
 export function* searchTools({ text, checked }) {
-  let tools = undefined;
+  let tools;
 
   if (checked) {
     tools = yield call(api.get, `/tools?tags_like=${text}`);
@@ -27,23 +25,17 @@ export function* addTool({ tool }) {
   const { title, link, description, tags } = tool;
 
   if (!title || !link || !description || !tags.length) {
-    return toast.error(
-      <ToastContentError>You need to fill in all the fields!</ToastContentError>
-    );
-  }
+    toastError('You need to fill in all the fields!');
+  } else {
+    try {
+      const { data } = yield call(api.post, '/tools', tool);
 
-  try {
-    const { data } = yield call(api.post, '/tools', tool);
+      yield put(addToolSuccess(data));
 
-    yield put(addToolSuccess(data));
-
-    toast.success(
-      <ToastContentSuccess>
-        <b>{tool.title}</b> has been successfully added!
-      </ToastContentSuccess>
-    );
-  } catch (err) {
-    console.log(err);
+      toastSuccess(`${tool.title} has been successfully added!`);
+    } catch (err) {
+      toastError('There was a problem! Please, try later');
+    }
   }
 }
 
@@ -57,12 +49,8 @@ export function* removeTool({ tool }) {
 
     yield put(fetchToolsSuccess(tools));
 
-    toast.success(
-      <ToastContentSuccess>
-        <b>{tool.title}</b> has been successfully removed!
-      </ToastContentSuccess>
-    );
+    toastSuccess(`${tool.title} has been successfully removed!`);
   } catch (err) {
-    console.log(err);
+    toastError('There was a problem! Please, try later');
   }
 }
