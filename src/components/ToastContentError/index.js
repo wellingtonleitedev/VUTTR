@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import Icon from '../../assets/images/danger.svg';
 import { Container, Figure, Description, Title, Text } from './styles';
 
@@ -14,4 +15,8 @@ export const ToastContentError = ({ children }) => {
       </Description>
     </Container>
   );
+};
+
+ToastContentError.propTypes = {
+  children: PropTypes.string.isRequired,
 };

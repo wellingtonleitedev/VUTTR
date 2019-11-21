@@ -1,11 +1,12 @@
 import React, { useState } from 'react';
 import { FaPlus } from 'react-icons/fa';
-import { Container, Actions, Inputs } from './styles';
-import { IconButton, SearchInput, CheckboxInput } from '../';
+import PropTypes from 'prop-types';
 import { useDispatch } from 'react-redux';
+import { Container, Actions, Inputs } from './styles';
+import { IconButton, SearchInput, CheckboxInput } from '..';
 import { searchToolsRequest } from '../../store/modules/tools/actions';
 
-export const Header = ({ onClick, value }) => {
+export const Header = ({ onClick }) => {
   const dispatch = useDispatch();
   const [checked, setChecked] = useState(false);
 
@@ -19,10 +20,7 @@ export const Header = ({ onClick, value }) => {
       <h3>Very Useful Tools to Remember</h3>
       <Actions>
         <Inputs>
-          <SearchInput
-            value={value}
-            onChange={e => handleSearch(e.target.value)}
-          />
+          <SearchInput onChange={e => handleSearch(e.target.value)} />
           <CheckboxInput
             checked={checked}
             onChecked={() => setChecked(!checked)}
@@ -38,4 +36,8 @@ export const Header = ({ onClick, value }) => {
       </Actions>
     </Container>
   );
+};
+
+Header.propTypes = {
+  onClick: PropTypes.func.isRequired,
 };

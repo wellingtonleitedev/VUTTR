@@ -1,7 +1,8 @@
 import React, { useState, useMemo } from 'react';
-import { Overlay, Content, ModalHeader } from './styles';
 import { FaTimes } from 'react-icons/fa';
-import { IconButton } from '../';
+import PropTypes from 'prop-types';
+import { Overlay, Content, ModalHeader } from './styles';
+import { IconButton } from '..';
 
 export function Modal({ open, header, children, onClose }) {
   const [situation, setSituation] = useState(open);
@@ -20,12 +21,21 @@ export function Modal({ open, header, children, onClose }) {
       <Content>
         <ModalHeader>
           {header}
-          <IconButton onClick={handleModal} color="transparent">
-            <FaTimes color="#365df0" size={13} />
-          </IconButton>
+          <IconButton
+            onClick={handleModal}
+            color="transparent"
+            icon={<FaTimes color="#365df0" size={13} />}
+          />
         </ModalHeader>
         {children}
       </Content>
     </Overlay>
   );
 }
+
+Modal.propTypes = {
+  open: PropTypes.bool.isRequired,
+  header: PropTypes.element.isRequired,
+  children: PropTypes.element.isRequired,
+  onClose: PropTypes.func.isRequired,
+};

@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import { FaTimes } from 'react-icons/fa';
 import { useDispatch, useSelector } from 'react-redux';
 import { Container, Item, HeaderList, Description, Tags, Tag } from './styles';
-import { IconButton } from '../';
+import { IconButton } from '..';
 import {
   fetchToolsRequest,
   removeToolRequest,
@@ -41,7 +41,7 @@ export function List() {
           </Description>
           <Tags>
             {tool.tags.map((tag, index) => (
-              <Tag key={index}>
+              <Tag key={String(index)}>
                 <small>#{tag}</small>
               </Tag>
             ))}
