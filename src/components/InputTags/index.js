@@ -1,4 +1,4 @@
-import React, { useState, useRef, useMemo } from 'react';
+import React, { useState, useRef, useMemo, useCallback } from 'react';
 import { FaTimes } from 'react-icons/fa';
 import PropTypes from 'prop-types';
 import { Container, Input, Tags, Tag } from './styles';
@@ -7,11 +7,11 @@ export function InputTags({ value, onChange, children }) {
   const inputRef = useRef(null);
   const [tags, setTags] = useState([]);
 
-  useMemo(() => {
+  useCallback(() => {
     if (tags.length) {
       onChange(tags);
     }
-  }, [tags]);
+  }, [onChange, tags]);
 
   useMemo(() => {
     if (!value.length) {

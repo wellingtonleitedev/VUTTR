@@ -14,7 +14,7 @@ export function List() {
 
   useEffect(() => {
     dispatch(fetchToolsRequest());
-  }, []);
+  }, [dispatch]);
 
   const handleRemove = tool => {
     dispatch(removeToolRequest(tool));

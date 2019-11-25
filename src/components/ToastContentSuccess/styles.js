@@ -6,6 +6,12 @@ export const Container = styled.div`
   justify-content: space-around;
 `;
 
+export const Content = styled.div`
+  display: flex;
+  flex-direction: column;
+  width: 80%;
+`;
+
 export const Figure = styled.div`
   height: 20px;
   width: 20px;
@@ -16,7 +22,6 @@ export const Description = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
-  width: 80%;
 `;
 
 export const Title = styled.h4`
@@ -27,4 +32,13 @@ export const Title = styled.h4`
 
 export const Text = styled.p`
   font-size: 13px;
+`;
+
+export const Button = styled.button`
+  align-self: flex-start;
+  background-color: #fff;
+  color: #07bc0c;
+  letter-spacing: 0.36px;
+  margin-top: 20px;
+  padding: 10px 10px;
 `;

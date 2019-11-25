@@ -23,6 +23,10 @@ export const HeaderList = styled.div`
   display: flex;
   justify-content: space-between;
   margin-bottom: 10px;
+
+  button {
+    align-self: flex-start;
+  }
 `;
 
 export const Description = styled.div`
