@@ -1,37 +1,31 @@
-/* eslint-disable jsx-a11y/label-has-associated-control */
-import React, { useState, useRef, useMemo } from 'react';
-import { useDispatch } from 'react-redux';
+import React, { useState, useRef } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { FaPlus } from 'react-icons/fa';
-import PropTypes from 'prop-types';
 import { ModalHeader, Form, Actions, Button } from './styles';
 import { InputLabel, InputTags, TextareaLabel, Modal } from '..';
 import { addToolRequest } from '../../store/modules/tools/actions';
+import { handleFormModal } from '../../store/modules/modal/actions';
 
-export default function AddFormModal({ open, onClose }) {
+export default function AddFormModal() {
   const formRef = useRef(null);
+  const open = useSelector(state => state.modal.openForm);
   const dispatch = useDispatch();
   const [tool, setTool] = useState({ tags: [] });
-  const [situation, setSituation] = useState(open);
-
-  useMemo(() => {
-    setSituation(open);
-  }, [open]);
 
   const handleSubmit = async e => {
     e.preventDefault();
 
     dispatch(addToolRequest(tool));
+    dispatch(handleFormModal(false));
 
     formRef.current.reset();
 
     setTool({ tags: [] });
-    onClose();
   };
 
   return (
     <Modal
-      open={situation}
-      onClose={onClose}
+      open={open}
       header={
         <ModalHeader>
           <FaPlus color="#365df0" size={15} />
@@ -75,8 +69,3 @@ export default function AddFormModal({ open, onClose }) {
     </Modal>
   );
 }
-
-AddFormModal.propTypes = {
-  open: PropTypes.bool.isRequired,
-  onClose: PropTypes.func.isRequired,
-};

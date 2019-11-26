@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { useDispatch } from 'react-redux';
 import Icon from '../../assets/images/check-circle.svg';
 import {
   Container,
@@ -10,8 +11,11 @@ import {
   Text,
   Button,
 } from './styles';
+import { handleViewModal } from '../../store/modules/modal/actions';
 
 export const ToastContentSuccess = ({ children }) => {
+  const dispatch = useDispatch();
+
   return (
     <Container>
       <Figure>
@@ -22,7 +26,12 @@ export const ToastContentSuccess = ({ children }) => {
           <Title>This was a complete success!</Title>
           <Text>{children}</Text>
         </Description>
-        <Button type="button">Show</Button>
+        <Button
+          type="button"
+          onClick={() => dispatch(handleViewModal({}, true))}
+        >
+          Show
+        </Button>
       </Content>
     </Container>
   );

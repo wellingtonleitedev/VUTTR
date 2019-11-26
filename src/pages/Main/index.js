@@ -4,19 +4,13 @@ import { Header, List } from '../../components';
 import AddFormModal from '../../components/AddFormModal';
 
 export default function Main() {
-  const [open, setOpen] = React.useState(false);
-
-  const handleModal = () => {
-    setOpen(!open);
-  };
-
   return (
     <Container>
       <Content>
-        <Header onClick={handleModal} />
+        <Header />
         <List />
       </Content>
-      <AddFormModal onClose={handleModal} open={open} />
+      <AddFormModal />
     </Container>
   );
 }
