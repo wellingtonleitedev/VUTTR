@@ -32,7 +32,7 @@ export function* addTool({ tool }) {
 
       yield put(addToolSuccess(data));
 
-      toastSuccess(`${tool.title} has been successfully added!`);
+      toastSuccess(`${data.title} has been successfully added!`, data);
     } catch (err) {
       toastError('There was a problem! Please, try later');
     }
@@ -49,7 +49,7 @@ export function* removeTool({ tool }) {
 
     yield put(fetchToolsSuccess(tools));
 
-    toastSuccess(`${tool.title} has been successfully removed!`);
+    toastSuccess(`${tool.title} has been successfully removed!`, tool);
   } catch (err) {
     toastError('There was a problem! Please, try later');
   }

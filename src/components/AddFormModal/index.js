@@ -6,7 +6,7 @@ import { InputLabel, InputTags, TextareaLabel, Modal } from '..';
 import { addToolRequest } from '../../store/modules/tools/actions';
 import { handleFormModal } from '../../store/modules/modal/actions';
 
-export default function AddFormModal() {
+export function AddFormModal() {
   const formRef = useRef(null);
   const open = useSelector(state => state.modal.openForm);
   const dispatch = useDispatch();

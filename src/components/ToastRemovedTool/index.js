@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { useDispatch } from 'react-redux';
 import Icon from '../../assets/images/check-circle.svg';
 import {
   Container,
@@ -10,8 +11,11 @@ import {
   Text,
   Button,
 } from './styles';
+import { handleRemovedModal } from '../../store/modules/modal/actions';
 
-export const ToastContentSuccess = ({ children, onClick }) => {
+export const ToastRemovedTool = ({ children, tool }) => {
+  const dispatch = useDispatch();
+
   return (
     <Container>
       <Figure>
@@ -22,7 +26,10 @@ export const ToastContentSuccess = ({ children, onClick }) => {
           <Title>This was a complete success!</Title>
           <Text>{children}</Text>
         </Description>
-        <Button type="button" onClick={onClick}>
+        <Button
+          type="button"
+          onClick={() => dispatch(handleRemovedModal(tool, true))}
+        >
           Show
         </Button>
       </Content>
@@ -30,11 +37,11 @@ export const ToastContentSuccess = ({ children, onClick }) => {
   );
 };
 
-ToastContentSuccess.defaultProps = {
-  onClick: () => {},
+ToastRemovedTool.defaultProps = {
+  tool: {},
 };
 
-ToastContentSuccess.propTypes = {
+ToastRemovedTool.propTypes = {
   children: PropTypes.string.isRequired,
-  onClick: PropTypes.func,
+  tool: PropTypes.shape(),
 };

@@ -31,3 +31,14 @@ export const Tag = styled.li`
   margin-right: 5px;
   padding: 5px;
 `;
+
+export const Button = styled.button`
+  align-items: center;
+  background-color: #365df0;
+  color: #fff;
+  display: flex;
+  letter-spacing: 0.36px;
+  margin-left: 5px;
+  margin-top: 20px;
+  padding: 10px 10px;
+`;

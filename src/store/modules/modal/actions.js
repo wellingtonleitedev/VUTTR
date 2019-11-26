@@ -19,3 +19,11 @@ export function handleViewModal(tool, open) {
     open,
   };
 }
+
+export function handleRemovedModal(tool, open) {
+  return {
+    type: '@modal/HANDLE_REMOVED_MODAL',
+    tool,
+    open,
+  };
+}

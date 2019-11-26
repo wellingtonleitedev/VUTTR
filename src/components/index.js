@@ -1,3 +1,4 @@
+export * from './AddFormModal';
 export * from './CheckboxInput';
 export * from './Header';
 export * from './IconButton';
@@ -6,6 +7,8 @@ export * from './InputTags';
 export * from './TextareaLabel';
 export * from './List';
 export * from './Modal';
+export * from './RemovedModal';
 export * from './SearchInput';
 export * from './ToastContentError';
 export * from './ToastContentSuccess';
+export * from './ViewModal';

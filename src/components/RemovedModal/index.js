@@ -1,11 +1,14 @@
 import React from 'react';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import { FaTools } from 'react-icons/fa';
 import { ModalHeader, Content, Description, Tags, Tag } from './styles';
 import { Modal } from '..';
+import { Button } from '../AddFormModal/styles';
+import { addToolRequest } from '../../store/modules/tools/actions';
 
-export function ViewModal() {
-  const open = useSelector(state => state.modal.openView);
+export function RemovedModal() {
+  const dispatch = useDispatch();
+  const open = useSelector(state => state.modal.openRemoved);
   const tool = useSelector(state => state.modal.tool);
 
   return (
@@ -14,7 +17,7 @@ export function ViewModal() {
       header={
         <ModalHeader>
           <FaTools color="#365df0" size={15} />
-          <h3>New Tool</h3>
+          <h3>Removed Tool</h3>
         </ModalHeader>
       }
     >
@@ -27,6 +30,7 @@ export function ViewModal() {
           {tool &&
             tool.tags.map((tag, index) => <Tag key={String(index)}>{tag}</Tag>)}
         </Tags>
+        <Button onClick={() => dispatch(addToolRequest(tool))}>Undo</Button>
       </Content>
     </Modal>
   );

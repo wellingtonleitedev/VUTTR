@@ -1,7 +1,12 @@
 import React from 'react';
 import { Container, Content } from './styles';
-import { Header, List } from '../../components';
-import AddFormModal from '../../components/AddFormModal';
+import {
+  Header,
+  List,
+  AddFormModal,
+  ViewModal,
+  RemovedModal,
+} from '../../components';
 
 export default function Main() {
   return (
@@ -11,6 +16,8 @@ export default function Main() {
         <List />
       </Content>
       <AddFormModal />
+      <ViewModal />
+      <RemovedModal />
     </Container>
   );
 }
