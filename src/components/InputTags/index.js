@@ -59,14 +59,15 @@ export function InputTags({ value, onChange, children }) {
         {children}
         <Container>
           <Tags>
-            {tags.map((tag, index) => (
-              <Tag key={String(index)}>
-                <small>{tag}</small>
-                <button type="button" onClick={() => handleRemove(index)}>
-                  <FaTimes size={13} color="#FFF" />
-                </button>
-              </Tag>
-            ))}
+            {tags &&
+              tags.map((tag, index) => (
+                <Tag key={String(index)}>
+                  <small>{tag}</small>
+                  <button type="button" onClick={() => handleRemove(index)}>
+                    <FaTimes size={13} color="#FFF" />
+                  </button>
+                </Tag>
+              ))}
             <Input id="tags" type="hidden" onChange={text => onChange(text)} />
             <Input
               id="tags"

@@ -5,9 +5,10 @@ export function handleModal(open) {
   };
 }
 
-export function handleFormModal(open) {
+export function handleFormModal(tool, open) {
   return {
     type: '@modal/HANDLE_FORM_MODAL',
+    tool,
     open,
   };
 }

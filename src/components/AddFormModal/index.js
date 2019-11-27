@@ -1,4 +1,4 @@
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, useMemo } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { FaPlus } from 'react-icons/fa';
 import { ModalHeader, Form, Actions, Button } from './styles';
@@ -9,18 +9,25 @@ import { handleFormModal } from '../../store/modules/modal/actions';
 export function AddFormModal() {
   const formRef = useRef(null);
   const open = useSelector(state => state.modal.openForm);
+  const value = useSelector(state => state.modal.tool);
   const dispatch = useDispatch();
-  const [tool, setTool] = useState({ tags: [] });
+  const [tool, setTool] = useState({});
+
+  useMemo(() => {
+    if (value) {
+      setTool(value);
+    }
+  }, [value]);
 
   const handleSubmit = async e => {
     e.preventDefault();
 
     dispatch(addToolRequest(tool));
-    dispatch(handleFormModal(false));
+    dispatch(handleFormModal({}, false));
 
-    formRef.current.reset();
+    // formRef.current.reset();
 
-    setTool({ tags: [] });
+    setTool({});
   };
 
   return (
@@ -35,6 +42,7 @@ export function AddFormModal() {
     >
       <Form onSubmit={handleSubmit} ref={formRef}>
         <InputLabel
+          value={tool.title}
           id="title"
           type="text"
           onChange={text => setTool({ ...tool, title: text })}
@@ -42,6 +50,7 @@ export function AddFormModal() {
           Tool Name
         </InputLabel>
         <InputLabel
+          value={tool.link}
           id="link"
           type="text"
           onChange={text => setTool({ ...tool, link: text })}
@@ -49,6 +58,7 @@ export function AddFormModal() {
           Tool Link
         </InputLabel>
         <TextareaLabel
+          value={tool.description}
           id="description"
           rows="5"
           onChange={text => setTool({ ...tool, description: text })}

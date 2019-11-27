@@ -19,12 +19,13 @@ export function ViewModal() {
       }
     >
       <Content>
-        <a href={tool && tool.link}>
+        <a href={tool && tool.link} target="_blank" rel="noopener noreferrer">
           <h3>{tool && tool.title}</h3>
         </a>
         <Description>{tool && tool.description}</Description>
         <Tags>
           {tool &&
+            tool.tags &&
             tool.tags.map((tag, index) => <Tag key={String(index)}>{tag}</Tag>)}
         </Tags>
       </Content>

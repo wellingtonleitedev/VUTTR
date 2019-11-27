@@ -4,6 +4,7 @@ export default function modal(state = [], action) {
   switch (action.type) {
     case '@modal/HANDLE_FORM_MODAL':
       return produce(state, draft => {
+        draft.tool = action.tool;
         draft.openForm = action.open;
       });
     case '@modal/HANDLE_VIEW_MODAL':

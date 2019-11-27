@@ -1,6 +1,10 @@
 import React from 'react';
 import { toast } from 'react-toastify';
-import { ToastContentError, ToastContentSuccess } from '../components';
+import {
+  ToastContentError,
+  ToastContentSuccess,
+  ToastNewToolError,
+} from '../components';
 import { ToastNewTool } from '../components/ToastNewTool';
 import { ToastRemovedTool } from '../components/ToastRemovedTool';
 
@@ -18,4 +22,8 @@ export const toastRemovedToolSuccess = (text, tool) => {
 
 export const toastError = text => {
   return toast.error(<ToastContentError>{text}</ToastContentError>);
+};
+
+export const toastNewToolError = (text, tool) => {
+  return toast.error(<ToastNewToolError tool={tool}>{text}</ToastNewToolError>);
 };

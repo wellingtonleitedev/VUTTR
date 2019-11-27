@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { FaPlus } from 'react-icons/fa';
 import { useDispatch } from 'react-redux';
 import { Container, Actions, Inputs } from './styles';
-import { IconButton, SearchInput, CheckboxInput } from '..';
+import { IconButton, InputSearch, CheckboxInput } from '..';
 import { searchToolsRequest } from '../../store/modules/tools/actions';
 import { handleFormModal } from '../../store/modules/modal/actions';
 
@@ -15,7 +15,7 @@ export const Header = () => {
   };
 
   const openModal = () => {
-    dispatch(handleFormModal(true));
+    dispatch(handleFormModal({}, true));
   };
 
   return (
@@ -24,7 +24,7 @@ export const Header = () => {
       <h3>Very Useful Tools to Remember</h3>
       <Actions>
         <Inputs>
-          <SearchInput onChange={e => handleSearch(e.target.value)} />
+          <InputSearch onChange={e => handleSearch(e.target.value)} />
           <CheckboxInput
             checked={checked}
             onChecked={() => setChecked(!checked)}
