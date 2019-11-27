@@ -15,7 +15,7 @@ export const Content = styled.form`
 `;
 
 export const Description = styled.div`
-  margin-bottom: 10px;
+  margin: 10px 0;
 `;
 
 export const Tags = styled.ul`
@@ -33,7 +33,7 @@ export const Tag = styled.li`
 `;
 
 export const Button = styled.button`
-  align-items: center;
+  align-self: flex-end;
   background-color: #365df0;
   color: #fff;
   display: flex;

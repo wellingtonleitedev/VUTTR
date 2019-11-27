@@ -1,9 +1,8 @@
 import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { FaTools } from 'react-icons/fa';
-import { ModalHeader, Content, Description, Tags, Tag } from './styles';
+import { ModalHeader, Content, Description, Tags, Tag, Button } from './styles';
 import { Modal } from '..';
-import { Button } from '../AddFormModal/styles';
 import { addToolRequest } from '../../store/modules/tools/actions';
 
 export function RemovedModal() {
@@ -30,7 +29,9 @@ export function RemovedModal() {
           {tool &&
             tool.tags.map((tag, index) => <Tag key={String(index)}>{tag}</Tag>)}
         </Tags>
-        <Button onClick={() => dispatch(addToolRequest(tool))}>Undo</Button>
+        <Button type="button" onClick={() => dispatch(addToolRequest(tool))}>
+          Undo Remove
+        </Button>
       </Content>
     </Modal>
   );

@@ -1,5 +1,9 @@
 import { call, put, select } from 'redux-saga/effects';
-import { toastSuccess, toastError } from '../../../helpers';
+import {
+  toastNewToolSuccess,
+  toastRemovedToolSuccess,
+  toastError,
+} from '../../../helpers';
 import api from '../../../services/api';
 import { fetchToolsSuccess, addToolSuccess } from './actions';
 
@@ -32,7 +36,7 @@ export function* addTool({ tool }) {
 
       yield put(addToolSuccess(data));
 
-      toastSuccess(`${data.title} has been successfully added!`, data);
+      toastNewToolSuccess(`${data.title} has been successfully added!`, data);
     } catch (err) {
       toastError('There was a problem! Please, try later');
     }
@@ -49,7 +53,10 @@ export function* removeTool({ tool }) {
 
     yield put(fetchToolsSuccess(tools));
 
-    toastSuccess(`${tool.title} has been successfully removed!`, tool);
+    toastRemovedToolSuccess(
+      `${tool.title} has been successfully removed!`,
+      tool
+    );
   } catch (err) {
     toastError('There was a problem! Please, try later');
   }

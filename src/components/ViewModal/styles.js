@@ -15,7 +15,7 @@ export const Content = styled.form`
 `;
 
 export const Description = styled.div`
-  margin-bottom: 10px;
+  margin: 10px 0;
 `;
 
 export const Tags = styled.ul`

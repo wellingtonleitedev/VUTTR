@@ -7,13 +7,11 @@ export default function modal(state = [], action) {
         draft.openForm = action.open;
       });
     case '@modal/HANDLE_VIEW_MODAL':
-      console.log('VIEW');
       return produce(state, draft => {
         draft.tool = action.tool;
         draft.openView = action.open;
       });
     case '@modal/HANDLE_REMOVED_MODAL':
-      console.log('REMOVED');
       return produce(state, draft => {
         draft.tool = action.tool;
         draft.openRemoved = action.open;
