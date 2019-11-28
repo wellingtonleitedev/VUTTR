@@ -31,7 +31,7 @@ export const Title = styled.h4`
 `;
 
 export const Text = styled.p`
-  font-size: 13px;
+  font-size: 12.5px;
 `;
 
 export const Button = styled.button`
