@@ -1,28 +1,21 @@
-import React, { useState, useMemo } from 'react';
+import React from 'react';
 import { FaTimes } from 'react-icons/fa';
 import PropTypes from 'prop-types';
+import { useDispatch } from 'react-redux';
 import { Overlay, Content, ModalHeader } from './styles';
 import { IconButton } from '..';
+import { handleModal } from '../../store/modules/modal/actions';
 
-export function Modal({ open, header, children, onClose }) {
-  const [situation, setSituation] = useState(open);
-
-  useMemo(() => {
-    setSituation(open);
-  }, [open]);
-
-  const handleModal = () => {
-    setSituation(!open);
-    onClose();
-  };
+export function Modal({ open, header, children }) {
+  const dispatch = useDispatch();
 
   return (
-    <Overlay onClose={onClose} modalOpen={situation}>
+    <Overlay modalOpen={open}>
       <Content>
         <ModalHeader>
           {header}
           <IconButton
-            onClick={handleModal}
+            onClick={() => dispatch(handleModal(false))}
             color="transparent"
             icon={<FaTimes color="#365df0" size={13} />}
           />
@@ -37,5 +30,4 @@ Modal.propTypes = {
   open: PropTypes.bool.isRequired,
   header: PropTypes.element.isRequired,
   children: PropTypes.element.isRequired,
-  onClose: PropTypes.func.isRequired,
 };

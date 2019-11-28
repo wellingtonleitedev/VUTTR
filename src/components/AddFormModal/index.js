@@ -1,37 +1,38 @@
-/* eslint-disable jsx-a11y/label-has-associated-control */
 import React, { useState, useRef, useMemo } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { FaPlus } from 'react-icons/fa';
-import PropTypes from 'prop-types';
 import { ModalHeader, Form, Actions, Button } from './styles';
 import { InputLabel, InputTags, TextareaLabel, Modal } from '..';
 import { addToolRequest } from '../../store/modules/tools/actions';
+import { handleFormModal } from '../../store/modules/modal/actions';
 
-export default function AddFormModal({ open, onClose }) {
+export function AddFormModal() {
   const formRef = useRef(null);
+  const open = useSelector(state => state.modal.openForm);
+  const value = useSelector(state => state.modal.tool);
   const dispatch = useDispatch();
-  const [tool, setTool] = useState({ tags: [] });
-  const [situation, setSituation] = useState(open);
+  const [tool, setTool] = useState({});
 
   useMemo(() => {
-    setSituation(open);
-  }, [open]);
+    if (value) {
+      setTool(value);
+    }
+  }, [value]);
 
   const handleSubmit = async e => {
     e.preventDefault();
 
     dispatch(addToolRequest(tool));
+    dispatch(handleFormModal({}, false));
 
     formRef.current.reset();
 
-    setTool({ tags: [] });
-    onClose();
+    setTool({});
   };
 
   return (
     <Modal
-      open={situation}
-      onClose={onClose}
+      open={open}
       header={
         <ModalHeader>
           <FaPlus color="#365df0" size={15} />
@@ -41,6 +42,7 @@ export default function AddFormModal({ open, onClose }) {
     >
       <Form onSubmit={handleSubmit} ref={formRef}>
         <InputLabel
+          value={tool.title}
           id="title"
           type="text"
           onChange={text => setTool({ ...tool, title: text })}
@@ -48,6 +50,7 @@ export default function AddFormModal({ open, onClose }) {
           Tool Name
         </InputLabel>
         <InputLabel
+          value={tool.link}
           id="link"
           type="text"
           onChange={text => setTool({ ...tool, link: text })}
@@ -55,6 +58,7 @@ export default function AddFormModal({ open, onClose }) {
           Tool Link
         </InputLabel>
         <TextareaLabel
+          value={tool.description}
           id="description"
           rows="5"
           onChange={text => setTool({ ...tool, description: text })}
@@ -75,8 +79,3 @@ export default function AddFormModal({ open, onClose }) {
     </Modal>
   );
 }
-
-AddFormModal.propTypes = {
-  open: PropTypes.bool.isRequired,
-  onClose: PropTypes.func.isRequired,
-};

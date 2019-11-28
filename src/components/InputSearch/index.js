@@ -3,7 +3,7 @@ import { FaSearch } from 'react-icons/fa';
 import PropTypes from 'prop-types';
 import { Container } from './styles';
 
-export const SearchInput = ({ onChange }) => {
+export const InputSearch = ({ onChange }) => {
   return (
     <Container>
       <button type="button">
@@ -19,6 +19,6 @@ export const SearchInput = ({ onChange }) => {
   );
 };
 
-SearchInput.propTypes = {
+InputSearch.propTypes = {
   onChange: PropTypes.func.isRequired,
 };

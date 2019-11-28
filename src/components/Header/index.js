@@ -1,17 +1,21 @@
 import React, { useState } from 'react';
 import { FaPlus } from 'react-icons/fa';
-import PropTypes from 'prop-types';
 import { useDispatch } from 'react-redux';
 import { Container, Actions, Inputs } from './styles';
-import { IconButton, SearchInput, CheckboxInput } from '..';
+import { IconButton, InputSearch, CheckboxInput } from '..';
 import { searchToolsRequest } from '../../store/modules/tools/actions';
+import { handleFormModal } from '../../store/modules/modal/actions';
 
-export const Header = ({ onClick }) => {
+export const Header = () => {
   const dispatch = useDispatch();
   const [checked, setChecked] = useState(false);
 
   const handleSearch = text => {
     dispatch(searchToolsRequest(text, checked));
+  };
+
+  const openModal = () => {
+    dispatch(handleFormModal({}, true));
   };
 
   return (
@@ -20,14 +24,14 @@ export const Header = ({ onClick }) => {
       <h3>Very Useful Tools to Remember</h3>
       <Actions>
         <Inputs>
-          <SearchInput onChange={e => handleSearch(e.target.value)} />
+          <InputSearch onChange={e => handleSearch(e.target.value)} />
           <CheckboxInput
             checked={checked}
             onChecked={() => setChecked(!checked)}
           />
         </Inputs>
         <IconButton
-          onClick={onClick}
+          onClick={() => openModal()}
           color="#365df0"
           icon={<FaPlus color="#FFF" size={13} />}
         >
@@ -36,8 +40,4 @@ export const Header = ({ onClick }) => {
       </Actions>
     </Container>
   );
-};
-
-Header.propTypes = {
-  onClick: PropTypes.func.isRequired,
 };

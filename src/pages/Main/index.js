@@ -1,22 +1,23 @@
 import React from 'react';
 import { Container, Content } from './styles';
-import { Header, List } from '../../components';
-import AddFormModal from '../../components/AddFormModal';
+import {
+  Header,
+  List,
+  AddFormModal,
+  ViewModal,
+  RemovedModal,
+} from '../../components';
 
 export default function Main() {
-  const [open, setOpen] = React.useState(false);
-
-  const handleModal = () => {
-    setOpen(!open);
-  };
-
   return (
     <Container>
       <Content>
-        <Header onClick={handleModal} />
+        <Header />
         <List />
       </Content>
-      <AddFormModal onClose={handleModal} open={open} />
+      <AddFormModal />
+      <ViewModal />
+      <RemovedModal />
     </Container>
   );
 }

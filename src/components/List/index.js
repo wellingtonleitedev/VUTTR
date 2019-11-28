@@ -14,7 +14,7 @@ export function List() {
 
   useEffect(() => {
     dispatch(fetchToolsRequest());
-  }, []);
+  }, [dispatch]);
 
   const handleRemove = tool => {
     dispatch(removeToolRequest(tool));
@@ -25,7 +25,7 @@ export function List() {
       {tools.map(tool => (
         <Item key={tool.id}>
           <HeaderList className="header-list">
-            <a href={tool.link}>
+            <a href={tool.link} target="_blank" rel="noopener noreferrer">
               <h3>{tool.title}</h3>
             </a>
             <IconButton
