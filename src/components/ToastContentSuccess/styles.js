@@ -40,5 +40,5 @@ export const Button = styled.button`
   color: #07bc0c;
   letter-spacing: 0.36px;
   margin-top: 20px;
-  padding: 10px 10px;
+  padding: 5px 15px;
 `;

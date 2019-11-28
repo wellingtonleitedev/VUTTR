@@ -25,7 +25,7 @@ export function AddFormModal() {
     dispatch(addToolRequest(tool));
     dispatch(handleFormModal({}, false));
 
-    // formRef.current.reset();
+    formRef.current.reset();
 
     setTool({});
   };

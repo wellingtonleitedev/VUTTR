@@ -84,7 +84,7 @@ export function InputTags({ value, onChange, children }) {
 
 InputTags.defaultProps = {
   children: '',
-  value: '',
+  value: [''],
 };
 
 InputTags.propTypes = {

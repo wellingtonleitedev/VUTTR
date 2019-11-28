@@ -11,7 +11,4 @@ export * from './RemovedModal';
 export * from './InputSearch';
 export * from './ToastContentError';
 export * from './ToastContentSuccess';
-export * from './ToastNewToolError';
-export * from './ToastNewTool';
-export * from './ToastRemovedTool';
 export * from './ViewModal';

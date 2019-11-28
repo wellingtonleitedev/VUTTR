@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { useDispatch } from 'react-redux';
 import Icon from '../../assets/images/check-circle.svg';
 import {
   Container,
@@ -10,8 +11,22 @@ import {
   Text,
   Button,
 } from './styles';
+import {
+  handleViewModal,
+  handleRemovedModal,
+} from '../../store/modules/modal/actions';
 
-export const ToastContentSuccess = ({ children, onClick }) => {
+export const ToastContentSuccess = ({ children, func, params }) => {
+  const dispatch = useDispatch();
+  const actions = {
+    handleViewModal: () => {
+      dispatch(handleViewModal(...params));
+    },
+    handleRemovedModal: () => {
+      dispatch(handleRemovedModal(...params));
+    },
+  };
+
   return (
     <Container>
       <Figure>
@@ -22,19 +37,23 @@ export const ToastContentSuccess = ({ children, onClick }) => {
           <Title>This was a complete success!</Title>
           <Text>{children}</Text>
         </Description>
-        <Button type="button" onClick={onClick}>
-          Show
-        </Button>
+        {actions[func] && (
+          <Button type="button" onClick={() => actions[func]()}>
+            Show
+          </Button>
+        )}
       </Content>
     </Container>
   );
 };
 
 ToastContentSuccess.defaultProps = {
-  onClick: () => {},
+  func: undefined,
+  params: undefined,
 };
 
 ToastContentSuccess.propTypes = {
   children: PropTypes.string.isRequired,
-  onClick: PropTypes.func,
+  func: PropTypes.string,
+  params: PropTypes.arrayOf(PropTypes.any),
 };
