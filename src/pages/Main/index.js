@@ -1,64 +1,23 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import { Container, Content } from './styles';
-import { Header } from '../../components/Header';
-import { List } from '../../components/List';
-import api from '../../services/api';
-import { Modal } from '../../components/Modal';
+import {
+  Header,
+  List,
+  AddFormModal,
+  ViewModal,
+  RemovedModal,
+} from '../../components';
 
 export default function Main() {
-  const [tools, setTools] = useState([]);
-  const [search, setSearch] = useState(undefined);
-  const [checked, setChecked] = useState(false);
-  const [open, setOpen] = React.useState(false);
-
-  useEffect(() => {
-    handleSearch();
-  }, [search]);
-
-  const handleOpen = async () => {
-    setOpen(true);
-  };
-
-  const handleClose = event => {
-    setOpen(false);
-  };
-
-  const handleRemove = async id => {
-    await api.delete(`/tools/${id}`);
-    fetchTools();
-  };
-
-  const fetchTools = async () => {
-    const tools = await api.get('/tools');
-    setTools([...tools.data]);
-  };
-
-  const handleSearch = async () => {
-    if (!search) return fetchTools();
-    let tools = undefined;
-
-    if (checked) {
-      tools = await api.get(`/tools?tags_like=${search}`);
-    } else {
-      tools = await api.get(`/tools?q=${search}`);
-    }
-
-    setTools([...tools.data]);
-  };
-
   return (
     <Container>
       <Content>
-        <Header
-          value={search}
-          checked={checked}
-          onChecked={() => setChecked(!checked)}
-          onChange={e => setSearch(e.target.value)}
-          onClick={handleOpen}
-        />
-        <List tools={tools} onClick={item => handleRemove(item)}></List>
+        <Header />
+        <List />
       </Content>
-      <Modal open={open} onClose={handleClose} />
+      <AddFormModal />
+      <ViewModal />
+      <RemovedModal />
     </Container>
   );
 }
