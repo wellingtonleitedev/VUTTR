@@ -1,17 +1,21 @@
-import React from 'react';
-import { FaPlus, FaSearch } from 'react-icons/fa';
-import { Container, Button, Actions, Inputs } from './styles';
-import { Modal } from '@material-ui/core';
+import React, { useState } from 'react';
+import { FaPlus } from 'react-icons/fa';
+import { useDispatch } from 'react-redux';
+import { Container, Actions, Inputs } from './styles';
+import { IconButton, InputSearch, CheckboxInput } from '..';
+import { searchToolsRequest } from '../../store/modules/tools/actions';
+import { handleFormModal } from '../../store/modules/modal/actions';
 
-export default function Header() {
-  const [open, setOpen] = React.useState(false);
+export const Header = () => {
+  const dispatch = useDispatch();
+  const [checked, setChecked] = useState(false);
 
-  const handleOpen = () => {
-    setOpen(true);
+  const handleSearch = text => {
+    dispatch(searchToolsRequest(text, checked));
   };
 
-  const handleClose = () => {
-    setOpen(false);
+  const openModal = () => {
+    dispatch(handleFormModal({}, true));
   };
 
   return (
@@ -20,35 +24,20 @@ export default function Header() {
       <h3>Very Useful Tools to Remember</h3>
       <Actions>
         <Inputs>
-          <button>
-            <FaSearch color="#B1ADB9" size={14} />
-          </button>
-          <input
-            id="input-search"
-            type="text"
-            placeholder="Type what you are looking for"
+          <InputSearch onChange={e => handleSearch(e.target.value)} />
+          <CheckboxInput
+            checked={checked}
+            onChecked={() => setChecked(!checked)}
           />
-          <input id="input-check" type="checkbox" />
-          <label htmlFor="input-check">search in logs only</label>
         </Inputs>
-        <Button onClick={handleOpen}>
-          <FaPlus color="#FFF" size={13} />
+        <IconButton
+          onClick={() => openModal()}
+          color="#365df0"
+          icon={<FaPlus color="#FFF" size={13} />}
+        >
           Add
-        </Button>
+        </IconButton>
       </Actions>
-      <Modal
-        aria-labelledby="simple-modal-title"
-        aria-describedby="simple-modal-description"
-        open={open}
-        onClose={handleClose}
-      >
-        <div>
-          <h2 id="simple-modal-title">Text in a modal</h2>
-          <p id="simple-modal-description">
-            Duis mollis, est non commodo luctus, nisi erat porttitor ligula.
-          </p>
-        </div>
-      </Modal>
     </Container>
   );
-}
+};

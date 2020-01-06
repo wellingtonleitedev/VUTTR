@@ -23,6 +23,10 @@ export const HeaderList = styled.div`
   display: flex;
   justify-content: space-between;
   margin-bottom: 10px;
+
+  button {
+    align-self: flex-start;
+  }
 `;
 
 export const Description = styled.div`
@@ -41,17 +45,4 @@ export const Tag = styled.li`
   border-radius: 5px;
   margin-right: 5px;
   padding: 5px;
-`;
-
-export const Button = styled.button`
-  align-items: center;
-  background-color: #f95e5a;
-  color: #fff;
-  display: flex;
-  letter-spacing: 0.36px;
-  padding: 5px 10px;
-
-  svg {
-    margin-right: 2px;
-  }
 `;
