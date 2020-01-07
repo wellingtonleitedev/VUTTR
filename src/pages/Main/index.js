@@ -6,6 +6,7 @@ import {
   AddFormModal,
   ViewModal,
   RemovedModal,
+  Pagination,
 } from '../../components';
 
 export default function Main() {
@@ -14,6 +15,7 @@ export default function Main() {
       <Content>
         <Header />
         <List />
+        <Pagination />
       </Content>
       <AddFormModal />
       <ViewModal />
