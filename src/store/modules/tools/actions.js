@@ -4,10 +4,10 @@ export function fetchToolsRequest() {
   };
 }
 
-export function fetchToolsSuccess(tool) {
+export function fetchToolsSuccess(data) {
   return {
     type: '@tool/FETCH_SUCCESS',
-    tool,
+    data,
   };
 }
 

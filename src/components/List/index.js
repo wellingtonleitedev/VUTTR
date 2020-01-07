@@ -1,3 +1,4 @@
+/* eslint-disable no-underscore-dangle */
 import React, { useEffect } from 'react';
 import { FaTimes } from 'react-icons/fa';
 import { useDispatch, useSelector } from 'react-redux';
@@ -23,7 +24,7 @@ export function List() {
   return (
     <Container>
       {tools.map(tool => (
-        <Item key={tool.id}>
+        <Item key={tool._id}>
           <HeaderList className="header-list">
             <a href={tool.link} target="_blank" rel="noopener noreferrer">
               <h3>{tool.title}</h3>
