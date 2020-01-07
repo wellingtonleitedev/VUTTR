@@ -10,7 +10,7 @@ import { fetchToolsSuccess, addToolSuccess } from './actions';
 
 export function* fetchTools() {
   const { data } = yield call(api.get, '/tools');
-
+  console.log(data);
   yield put(fetchToolsSuccess(data));
 }
 
