@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { Container, Content } from './styles';
 import {
   Header,
@@ -9,13 +10,13 @@ import {
   Pagination,
 } from '../../components';
 
-export default function Main() {
+export default function Main({ match }) {
   return (
     <Container>
       <Content>
         <Header />
         <List />
-        <Pagination />
+        <Pagination page={match.params.page} pages={11} />
       </Content>
       <AddFormModal />
       <ViewModal />
@@ -23,3 +24,11 @@ export default function Main() {
     </Container>
   );
 }
+
+Main.propTypes = {
+  match: PropTypes.shape({
+    params: PropTypes.shape({
+      page: PropTypes.string,
+    }),
+  }).isRequired,
+};

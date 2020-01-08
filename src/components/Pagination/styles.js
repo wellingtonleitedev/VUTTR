@@ -4,21 +4,39 @@ export const Container = styled.div`
   .pagination {
     color: #fff;
     display: flex;
+    font-weight: bold;
     justify-content: center;
     max-width: 100%;
 
     ul {
       display: flex;
+      padding: 15px;
       overflow: hidden;
 
       li {
-        padding: 5px 10px;
+        align-items: center;
+        display: flex;
+        height: 25px;
+        justify-content: center;
+        padding: 15px 15px;
+        width: 25px;
       }
 
       .active {
-        background-color: rgba(255, 255, 255, 0.5);
+        background-color: #ebeaed;
         border-radius: 50%;
+        color: #170c3a;
       }
     }
+  }
+`;
+
+export const Button = styled.button`
+  background-color: transparent;
+  border: 0;
+
+  svg {
+    margin: 0 5px;
+    vertical-align: middle;
   }
 `;
