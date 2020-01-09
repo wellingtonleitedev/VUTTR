@@ -1,34 +1,11 @@
 import styled from 'styled-components';
 
 export const Container = styled.div`
-  .pagination {
-    color: #fff;
-    display: flex;
-    font-weight: bold;
-    justify-content: center;
-    max-width: 100%;
-
-    ul {
-      display: flex;
-      padding: 15px;
-      overflow: hidden;
-
-      li {
-        align-items: center;
-        display: flex;
-        height: 25px;
-        justify-content: center;
-        padding: 15px 15px;
-        width: 25px;
-      }
-
-      .active {
-        background-color: #ebeaed;
-        border-radius: 50%;
-        color: #170c3a;
-      }
-    }
-  }
+  color: #fff;
+  display: flex;
+  font-weight: bold;
+  justify-content: center;
+  max-width: 100%;
 `;
 
 export const Button = styled.button`
@@ -39,4 +16,21 @@ export const Button = styled.button`
     margin: 0 5px;
     vertical-align: middle;
   }
+`;
+
+export const List = styled.ul`
+  display: flex;
+  padding: 15px;
+`;
+
+export const Item = styled.li`
+  background-color: ${props => (props.actived ? '#ebeaed' : 'transparent')};
+  border-radius: 50%;
+  color: ${props => (props.actived ? '#170c3a' : '#fff')};
+  align-items: center;
+  display: flex;
+  height: 25px;
+  justify-content: center;
+  padding: 15px 15px;
+  width: 25px;
 `;

@@ -1,100 +1,84 @@
 /* eslint-disable no-undef */
-import React, { useRef, useEffect, useState } from 'react';
+import React, { useRef, useState } from 'react';
 import { FaChevronLeft, FaChevronRight } from 'react-icons/fa';
 import PropTypes from 'prop-types';
-import { Container, Button } from './styles';
+import { Container, Button, List, Item } from './styles';
 
-export function Pagination({ page, pages }) {
+export function Pagination({ pages }) {
   const ulRef = useRef();
-  const [disablePrevious] = useState(Number(page) === 1);
-  const [disableNext] = useState(Number(page) === pages);
+  const [page, setPage] = useState(9);
+  const [lastValues, setLastValues] = useState(10);
 
   const paginationItemsRender = () => {
     const items = [];
     for (let number = 1; number <= pages; number += 1) {
       items.push(
-        <li>
+        <Item key={number} actived={number === Number(page)}>
           <span>{number}</span>
-        </li>
+        </Item>
       );
     }
-    return items.slice(0, 10);
+
+    return items.slice(lastValues - 10, lastValues);
   };
 
-  useEffect(() => {
-    ulRef.current.childNodes.forEach(child => {
-      if (child.firstChild.innerHTML === page) {
-        child.classList.add('active');
-      }
-    });
-  }, [page]);
+  const backwardWithActived = value => {
+    const firstOption = Number(ulRef.current.firstChild.firstChild.innerHTML);
+    const lastOption = Number(ulRef.current.lastChild.firstChild.innerHTML);
 
-  const backwardWithActived = () => {
-    const actived = document.querySelector('.active');
-    const previous = actived.previousSibling;
-
-    if (previous) {
-      actived.classList.remove('active');
-      previous.classList.add('active');
-    } else if (Number(actived.innerHTML) !== 1) {
-      ulRef.current.childNodes.forEach(child => {
-        child.firstChild.innerHTML = Number(child.firstChild.innerHTML) - 10;
-      });
-      actived.classList.remove('active');
-      ulRef.current.lastChild.classList.add('active');
+    if (value < firstOption) {
+      setLastValues(lastValues - 10);
+    } else if (lastValues === lastOption && value < pages) {
+      const diferent = lastValues - value;
+      setLastValues(lastValues - diferent);
     }
   };
 
-  const forwardWithActived = () => {
-    const actived = document.querySelector('.active');
-    const next = actived.nextSibling;
+  const forwardWithActived = value => {
+    const sum = lastValues + 10;
+    const lastOption = Number(ulRef.current.lastChild.firstChild.innerHTML);
 
-    if (next) {
-      actived.classList.remove('active');
-      next.classList.add('active');
-    } else {
-      ulRef.current.childNodes.forEach(child => {
-        child.firstChild.innerHTML = Number(child.firstChild.innerHTML) + 10;
-      });
-      actived.classList.remove('active');
-      ulRef.current.firstChild.classList.add('active');
+    if (value > lastOption && sum <= pages) {
+      setLastValues(sum);
+    } else if (value > lastOption) {
+      const diferent = pages - lastOption;
+      setLastValues(lastValues + diferent);
     }
   };
 
   const previousPage = () => {
-    backwardWithActived();
+    setPage(page - 1);
+    backwardWithActived(page - 1);
   };
 
   const nextPage = () => {
-    forwardWithActived();
+    setPage(page + 1);
+    forwardWithActived(page + 1);
   };
 
   return (
     <Container>
-      <div className="pagination">
-        <Button
-          type="button"
-          disabled={disablePrevious}
-          onClick={() => previousPage()}
-        >
-          <FaChevronLeft color="#fff" size={13} />
-          Anterior
-        </Button>
-        <ul ref={ulRef}>{paginationItemsRender()}</ul>
-        <Button type="button" disabled={disableNext} onClick={() => nextPage()}>
-          Próximo
-          <FaChevronRight color="#fff" size={13} />
-        </Button>
-      </div>
+      <Button
+        type="button"
+        disabled={Number(page) === 1}
+        onClick={() => previousPage()}
+      >
+        <FaChevronLeft color="#fff" size={13} />
+        Anterior
+      </Button>
+      <List ref={ulRef}>{paginationItemsRender(page, pages)}</List>
+      <Button
+        type="button"
+        disabled={Number(page) === pages}
+        onClick={() => nextPage()}
+      >
+        Próximo
+        <FaChevronRight color="#fff" size={13} />
+      </Button>
     </Container>
   );
 }
 
-Pagination.defaultProps = {
-  page: '1',
-};
-
 Pagination.propTypes = {
-  page: PropTypes.string,
   pages: PropTypes.number.isRequired,
 };
