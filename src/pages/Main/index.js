@@ -15,11 +15,11 @@ export default function Main() {
       <Content>
         <Header />
         <List />
-        <Pagination pages={13} />
       </Content>
       <AddFormModal />
       <ViewModal />
       <RemovedModal />
+      <Pagination pages={35} />
     </Container>
   );
 }

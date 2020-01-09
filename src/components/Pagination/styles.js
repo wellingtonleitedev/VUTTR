@@ -1,11 +1,13 @@
 import styled from 'styled-components';
 
 export const Container = styled.div`
+  bottom: 10px;
   color: #fff;
   display: flex;
   font-weight: bold;
   justify-content: center;
   max-width: 100%;
+  position: absolute;
 `;
 
 export const Button = styled.button`

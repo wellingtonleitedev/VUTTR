@@ -6,8 +6,10 @@ import { Container, Button, List, Item } from './styles';
 
 export function Pagination({ pages }) {
   const ulRef = useRef();
-  const [page, setPage] = useState(9);
-  const [lastValues, setLastValues] = useState(10);
+  const [page, setPage] = useState(25);
+  const [lastValues, setLastValues] = useState(
+    page - (page % 10) + 10 > pages ? pages : page - (page % 10) + 10
+  );
 
   const paginationItemsRender = () => {
     const items = [];
@@ -25,11 +27,11 @@ export function Pagination({ pages }) {
   const backwardWithActived = value => {
     const firstOption = Number(ulRef.current.firstChild.firstChild.innerHTML);
     const lastOption = Number(ulRef.current.lastChild.firstChild.innerHTML);
+    const diferent = lastValues % 10;
 
     if (value < firstOption) {
       setLastValues(lastValues - 10);
-    } else if (lastValues === lastOption && value < pages) {
-      const diferent = lastValues - value;
+    } else if (lastValues === lastOption && value === lastValues - diferent) {
       setLastValues(lastValues - diferent);
     }
   };
