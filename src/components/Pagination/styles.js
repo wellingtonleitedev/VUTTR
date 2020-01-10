@@ -1,6 +1,7 @@
 import styled from 'styled-components';
 
 export const Container = styled.div`
+  align-items: center;
   bottom: 10px;
   color: #fff;
   display: flex;
@@ -20,6 +21,11 @@ export const Button = styled.button`
   }
 `;
 
+export const InitialPage = styled.div`
+  margin-left: 15px;
+  margin-right: -10px;
+`;
+
 export const List = styled.ul`
   display: flex;
   padding: 15px;
@@ -35,4 +41,9 @@ export const Item = styled.li`
   justify-content: center;
   padding: 15px 15px;
   width: 25px;
+`;
+
+export const LastPage = styled.div`
+  margin-left: -10px;
+  margin-right: 15px;
 `;

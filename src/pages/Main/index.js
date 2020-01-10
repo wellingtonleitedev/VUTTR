@@ -19,7 +19,7 @@ export default function Main() {
       <AddFormModal />
       <ViewModal />
       <RemovedModal />
-      <Pagination pages={35} />
+      <Pagination pages={100} />
     </Container>
   );
 }
