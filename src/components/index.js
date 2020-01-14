@@ -1,6 +1,7 @@
 export * from './AddFormModal';
 export * from './CheckboxInput';
 export * from './Header';
+export * from './HeaderActions';
 export * from './IconButton';
 export * from './InputLabel';
 export * from './InputTags';
