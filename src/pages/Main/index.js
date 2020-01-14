@@ -7,6 +7,7 @@ import {
   AddFormModal,
   ViewModal,
   RemovedModal,
+  Pagination,
 } from '../../components';
 
 export default function Main() {
@@ -19,6 +20,7 @@ export default function Main() {
       <AddFormModal />
       <ViewModal />
       <RemovedModal />
+      <Pagination pages={100} />
     </Container>
   );
 }

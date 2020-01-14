@@ -13,3 +13,4 @@ export * from './InputSearch';
 export * from './ToastContentError';
 export * from './ToastContentSuccess';
 export * from './ViewModal';
+export * from './Pagination';
