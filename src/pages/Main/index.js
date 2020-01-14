@@ -1,7 +1,8 @@
 import React from 'react';
-import { Container, Content } from './styles';
+import { Container } from '../../style/global';
+import { Content } from './styles';
 import {
-  Header,
+  HeaderActions,
   List,
   AddFormModal,
   ViewModal,
@@ -12,7 +13,7 @@ export default function Main() {
   return (
     <Container>
       <Content>
-        <Header />
+        <HeaderActions />
         <List />
       </Content>
       <AddFormModal />
