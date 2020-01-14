@@ -2,29 +2,21 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Label, Input } from './styles';
 
-export const InputLabel = ({ id, type, value, children, onChange }) => {
+export function InputLabel({ id, children, onChange, ...rest }) {
   return (
     <Label htmlFor={id}>
       {children}
-      <Input
-        id={id}
-        type={type}
-        value={value}
-        onChange={e => onChange(e.target.value)}
-      />
+      <Input {...rest} onChange={e => onChange(e.target.value)} />
     </Label>
   );
-};
+}
 
 InputLabel.defaultProps = {
-  value: '',
-  children: '',
+  children: null,
 };
 
 InputLabel.propTypes = {
   id: PropTypes.string.isRequired,
-  type: PropTypes.string.isRequired,
-  value: PropTypes.string,
   children: PropTypes.string,
   onChange: PropTypes.func.isRequired,
 };
