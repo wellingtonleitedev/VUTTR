@@ -9,7 +9,6 @@ export default function user(state = INITIAL_STATE, action) {
     case '@auth/SIGNIN_SUCCESS':
       return produce(state, draft => {
         draft.profile = action.payload.user;
-        console.log(state.profile);
       });
     default:
       return state;

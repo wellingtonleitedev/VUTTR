@@ -3,7 +3,7 @@ import { useDispatch } from 'react-redux';
 import { FaPlus } from 'react-icons/fa';
 import { Container, Inputs } from './styles';
 import { IconButton, InputSearch, CheckboxInput, Header } from '..';
-import { searchToolsRequest } from '../../store/modules/tools/actions';
+import { fetchToolsRequest } from '../../store/modules/tools/actions';
 import { handleFormModal } from '../../store/modules/modal/actions';
 
 export function HeaderActions() {
@@ -11,7 +11,9 @@ export function HeaderActions() {
   const [checked, setChecked] = useState(false);
 
   const handleSearch = text => {
-    dispatch(searchToolsRequest(text, checked));
+    if (checked) return dispatch(fetchToolsRequest({ tags_like: text }));
+
+    return dispatch(fetchToolsRequest({ q: text }));
   };
 
   const openModal = () => {

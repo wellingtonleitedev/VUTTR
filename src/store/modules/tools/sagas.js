@@ -13,21 +13,11 @@ import {
   removeToolSuccess,
 } from './actions';
 
-export function* fetchTools() {
-  const { data } = yield call(api.get, '/tools');
+export function* fetchTools({ payload }) {
+  const { params } = payload;
+
+  const { data } = yield call(api.get, `/tools`, { params });
   yield put(fetchToolsSuccess(data));
-}
-
-export function* searchTools({ text, checked }) {
-  let tools;
-
-  if (checked) {
-    tools = yield call(api.get, `/tools?tags_like=${text}`);
-  } else {
-    tools = yield call(api.get, `/tools?q=${text}`);
-  }
-
-  yield put(fetchToolsSuccess(tools.data));
 }
 
 export function* addTool({ tool }) {
