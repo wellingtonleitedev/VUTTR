@@ -21,7 +21,13 @@ export const Button = styled.button`
   }
 `;
 
-export const InitialPage = styled.div`
+export const InitialPage = styled.span`
+  cursor: pointer;
+  margin-left: 15px;
+  margin-right: -10px;
+`;
+
+export const InitialEllipse = styled.small`
   margin-left: 15px;
   margin-right: -10px;
 `;
@@ -35,6 +41,7 @@ export const Item = styled.li`
   background-color: ${props => (props.actived ? '#ebeaed' : 'transparent')};
   border-radius: 50%;
   color: ${props => (props.actived ? '#170c3a' : '#fff')};
+  cursor: pointer;
   align-items: center;
   display: flex;
   height: 25px;
@@ -43,7 +50,13 @@ export const Item = styled.li`
   width: 25px;
 `;
 
-export const LastPage = styled.div`
-  margin-left: -10px;
-  margin-right: 15px;
+export const LastEllipse = styled.small`
+  margin-left: -15px;
+  margin-right: 20px;
+`;
+
+export const LastPage = styled.span`
+  cursor: pointer;
+  margin-left: -15px;
+  margin-right: 20px;
 `;
