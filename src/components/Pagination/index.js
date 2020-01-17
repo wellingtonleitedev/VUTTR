@@ -1,4 +1,3 @@
-/* eslint-disable no-undef */
 import React, { useRef, useState } from 'react';
 import { FaChevronLeft, FaChevronRight } from 'react-icons/fa';
 import { useSelector, useDispatch } from 'react-redux';
@@ -10,35 +9,32 @@ export function Pagination() {
   const dispatch = useDispatch();
   const page = useSelector(state => Number(state.tools.page));
   const pages = useSelector(state => Number(state.tools.pages));
-  const [lastValues, setLastValues] = useState(
-    page - (page % 10) + 10 > pages ? pages : page - (page % 10) + 10
-  );
+  // const [pages] = useState(11);
 
-  const defineLastValues = value => {
-    const firstOption = Number(ulRef.current.firstChild.firstChild.innerHTML);
-    const lastOption = Number(ulRef.current.lastChild.firstChild.innerHTML);
-    const sum = lastValues + 10;
-    const diferent = lastValues % 10;
+  const defineParamsSlice = () => {
+    const limit = page > 10 ? 8 : 10;
+    let initialValue = page - 1 - ((page - 1) % limit);
+    const lastValue =
+      initialValue + limit > pages ? pages : initialValue + limit;
 
-    if (value < firstOption) {
-      setLastValues(lastValues - 10);
-    } else if (lastValues === lastOption && value === lastValues - diferent) {
-      setLastValues(lastValues - diferent);
-    } else if (value > lastOption && sum <= pages) {
-      setLastValues(sum);
-    } else if (value > lastOption) {
-      const subtration = pages - lastOption;
-      setLastValues(lastValues + subtration);
-    }
+    initialValue = page > 10 ? lastValue - (initialValue % limit) - limit : 0;
+
+    const params = {
+      initialValue,
+      lastValue,
+    };
+
+    return params;
   };
 
   const handlePaginate = value => {
     dispatch(fetchToolsRequest({ page: value }));
-    defineLastValues(value);
   };
 
   const paginationItemsRender = () => {
+    const params = defineParamsSlice();
     const items = [];
+
     for (let number = 1; number <= pages; number += 1) {
       items.push(
         <Item
@@ -51,9 +47,7 @@ export function Pagination() {
       );
     }
 
-    if (pages > 10) return items.slice(lastValues - 10, lastValues);
-
-    return items.slice(0, 10);
+    return items.slice(params.initialValue, params.lastValue);
   };
 
   return (
@@ -66,27 +60,7 @@ export function Pagination() {
         <FaChevronLeft color="#fff" size={13} />
         Anterior
       </Button>
-      {page > 10 && (
-        <>
-          <InitialPage>
-            <span>1</span>
-          </InitialPage>
-          <InitialPage>
-            <span>...</span>
-          </InitialPage>
-        </>
-      )}
       <List ref={ulRef}>{paginationItemsRender()}</List>
-      {lastValues && lastValues !== pages && page > 10 && (
-        <>
-          <LastPage>
-            <span>...</span>
-          </LastPage>
-          <LastPage>
-            <span>{pages}</span>
-          </LastPage>
-        </>
-      )}
       <Button
         type="button"
         disabled={page === pages}

@@ -17,10 +17,10 @@ export default function Main() {
         <HeaderActions />
         <List />
       </Content>
+      <Pagination />
       <AddFormModal />
       <ViewModal />
       <RemovedModal />
-      <Pagination />
     </Container>
   );
 }
