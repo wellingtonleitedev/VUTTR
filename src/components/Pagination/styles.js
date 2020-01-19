@@ -22,8 +22,13 @@ export const Button = styled.button`
 `;
 
 export const InitialPage = styled.div`
-  margin-left: 15px;
-  margin-right: -10px;
+  align-items: inherit;
+  cursor: pointer;
+  display: flex;
+  justify-content: space-around;
+  margin-left: 20px;
+  margin-right: -15px;
+  width: 50px;
 `;
 
 export const List = styled.ul`
@@ -35,6 +40,7 @@ export const Item = styled.li`
   background-color: ${props => (props.actived ? '#ebeaed' : 'transparent')};
   border-radius: 50%;
   color: ${props => (props.actived ? '#170c3a' : '#fff')};
+  cursor: pointer;
   align-items: center;
   display: flex;
   height: 25px;
@@ -44,6 +50,11 @@ export const Item = styled.li`
 `;
 
 export const LastPage = styled.div`
-  margin-left: -10px;
-  margin-right: 15px;
+  align-items: inherit;
+  cursor: pointer;
+  display: flex;
+  justify-content: space-around;
+  margin-left: -15px;
+  margin-right: 20px;
+  width: 50px;
 `;

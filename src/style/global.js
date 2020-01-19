@@ -58,5 +58,6 @@ export const Container = styled.div`
   justify-content: center;
   max-width: 100%;
   padding: 50px 20px;
+  position: relative;
   height: 100%;
 `;
