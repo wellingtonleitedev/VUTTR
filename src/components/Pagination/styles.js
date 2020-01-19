@@ -21,15 +21,14 @@ export const Button = styled.button`
   }
 `;
 
-export const InitialPage = styled.span`
+export const InitialPage = styled.div`
+  align-items: inherit;
   cursor: pointer;
-  margin-left: 15px;
-  margin-right: -10px;
-`;
-
-export const InitialEllipse = styled.small`
-  margin-left: 15px;
-  margin-right: -10px;
+  display: flex;
+  justify-content: space-around;
+  margin-left: 20px;
+  margin-right: -15px;
+  width: 50px;
 `;
 
 export const List = styled.ul`
@@ -50,13 +49,12 @@ export const Item = styled.li`
   width: 25px;
 `;
 
-export const LastEllipse = styled.small`
-  margin-left: -15px;
-  margin-right: 20px;
-`;
-
-export const LastPage = styled.span`
+export const LastPage = styled.div`
+  align-items: inherit;
   cursor: pointer;
+  display: flex;
+  justify-content: space-around;
   margin-left: -15px;
   margin-right: 20px;
+  width: 50px;
 `;

@@ -1,24 +1,14 @@
-import React, { useRef, useState } from 'react';
+import React, { useRef } from 'react';
 import { FaChevronLeft, FaChevronRight } from 'react-icons/fa';
 import { useSelector, useDispatch } from 'react-redux';
-import {
-  Container,
-  Button,
-  InitialPage,
-  InitialEllipse,
-  List,
-  Item,
-  LastEllipse,
-  LastPage,
-} from './styles';
+import { Container, Button, InitialPage, List, Item, LastPage } from './styles';
 import { fetchToolsRequest } from '../../store/modules/tools/actions';
 
 export function Pagination() {
   const ulRef = useRef();
   const dispatch = useDispatch();
   const page = useSelector(state => Number(state.tools.page));
-  // const pages = useSelector(state => Number(state.tools.pages));
-  const [pages] = useState(27);
+  const pages = useSelector(state => Number(state.tools.pages));
 
   const defineParams = () => {
     let limit = page > 10 ? 6 : 10;
@@ -28,7 +18,7 @@ export function Pagination() {
 
     limit = lastValue === pages ? 8 : 6;
 
-    initialValue = page > 10 ? lastValue - (initialValue % limit) - limit : 0;
+    initialValue = lastValue === pages ? lastValue - limit : initialValue;
 
     const params = {
       initialValue,
@@ -72,17 +62,17 @@ export function Pagination() {
         Anterior
       </Button>
       {page > 10 && (
-        <>
-          <InitialPage onClick={() => handlePaginate(1)}>1</InitialPage>
-          <InitialEllipse>...</InitialEllipse>
-        </>
+        <InitialPage onClick={() => handlePaginate(1)}>
+          <span>1</span>
+          <small>...</small>
+        </InitialPage>
       )}
       <List ref={ulRef}>{paginationItemsRender()}</List>
       {page > 10 && defineParams().lastValue < pages && (
-        <>
-          <LastEllipse>...</LastEllipse>
-          <LastPage onClick={() => handlePaginate(pages)}>{pages}</LastPage>
-        </>
+        <LastPage onClick={() => handlePaginate(pages)}>
+          <small>...</small>
+          <span>{pages}</span>
+        </LastPage>
       )}
       <Button
         type="button"
