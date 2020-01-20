@@ -1,4 +1,4 @@
-import { createGlobalStyle } from 'styled-components';
+import styled, { createGlobalStyle } from 'styled-components';
 
 export const Global = createGlobalStyle`
   * {
@@ -49,4 +49,15 @@ export const Global = createGlobalStyle`
     border-radius: 5px !important;
     padding: 15px;
   }
+`;
+
+export const Container = styled.div`
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  max-width: 100%;
+  padding: 50px 20px;
+  position: relative;
+  height: 100%;
 `;

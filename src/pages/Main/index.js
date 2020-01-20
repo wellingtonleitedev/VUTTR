@@ -1,20 +1,23 @@
 import React from 'react';
-import { Container, Content } from './styles';
+import { Container } from '../../style/global';
+import { Content } from './styles';
 import {
-  Header,
+  HeaderActions,
   List,
   AddFormModal,
   ViewModal,
   RemovedModal,
+  Pagination,
 } from '../../components';
 
 export default function Main() {
   return (
     <Container>
       <Content>
-        <Header />
+        <HeaderActions />
         <List />
       </Content>
+      <Pagination />
       <AddFormModal />
       <ViewModal />
       <RemovedModal />

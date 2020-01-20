@@ -1,4 +1,5 @@
-import { call, put, select } from 'redux-saga/effects';
+/* eslint-disable no-underscore-dangle */
+import { call, put } from 'redux-saga/effects';
 import {
   toastNewToolSuccess,
   toastNewToolError,
@@ -6,24 +7,17 @@ import {
   toastError,
 } from '../../../helpers';
 import api from '../../../services/api';
-import { fetchToolsSuccess, addToolSuccess } from './actions';
+import {
+  fetchToolsSuccess,
+  addToolSuccess,
+  removeToolSuccess,
+} from './actions';
 
-export function* fetchTools() {
-  const { data } = yield call(api.get, '/tools');
-  console.log(data);
+export function* fetchTools({ payload }) {
+  const { params } = payload;
+
+  const { data } = yield call(api.get, `/tools`, { params });
   yield put(fetchToolsSuccess(data));
-}
-
-export function* searchTools({ text, checked }) {
-  let tools;
-
-  if (checked) {
-    tools = yield call(api.get, `/tools?tags_like=${text}`);
-  } else {
-    tools = yield call(api.get, `/tools?q=${text}`);
-  }
-
-  yield put(fetchToolsSuccess(tools.data));
 }
 
 export function* addTool({ tool }) {
@@ -46,13 +40,9 @@ export function* addTool({ tool }) {
 
 export function* removeTool({ tool }) {
   try {
-    yield call(api.delete, `/tools/${tool.id}`);
+    yield call(api.delete, `/tools/${tool._id}`);
 
-    const tools = yield select(state => {
-      return state.tools.data.filter(t => t.id !== tool.id);
-    });
-
-    yield put(fetchToolsSuccess(tools));
+    yield put(removeToolSuccess(tool._id));
 
     toastRemovedToolSuccess(
       `${tool.title} has been successfully removed!`,

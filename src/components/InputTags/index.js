@@ -71,7 +71,6 @@ export function InputTags({ value, onChange, children }) {
             ))}
             <Input id="tags" type="hidden" onChange={text => onChange(text)} />
             <Input
-              id="tags"
               ref={inputRef}
               onKeyUp={event => handleRemoveForEvent(event)}
               onChange={e => pushTags(e.target.value)}

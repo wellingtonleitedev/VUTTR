@@ -1,6 +1,7 @@
-export function fetchToolsRequest() {
+export function fetchToolsRequest(params) {
   return {
     type: '@tool/FETCH_REQUEST',
+    payload: { params },
   };
 }
 
@@ -8,14 +9,6 @@ export function fetchToolsSuccess(data) {
   return {
     type: '@tool/FETCH_SUCCESS',
     data,
-  };
-}
-
-export function searchToolsRequest(text, checked) {
-  return {
-    type: '@tool/SEARCH_REQUEST',
-    text,
-    checked,
   };
 }
 

@@ -1,6 +1,7 @@
 export * from './AddFormModal';
 export * from './CheckboxInput';
 export * from './Header';
+export * from './HeaderActions';
 export * from './IconButton';
 export * from './InputLabel';
 export * from './InputTags';
@@ -12,3 +13,4 @@ export * from './InputSearch';
 export * from './ToastContentError';
 export * from './ToastContentSuccess';
 export * from './ViewModal';
+export * from './Pagination';
