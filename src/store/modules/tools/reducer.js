@@ -15,15 +15,6 @@ export default function tools(state = INITIAL_STATE, action) {
         draft.page = action.data.page;
         draft.pages = action.data.pages;
       });
-    case '@tool/ADD_SUCCESS':
-      return produce(state, draft => {
-        draft.data.push(action.tool);
-      });
-    case '@tool/REMOVE_SUCCESS':
-      return produce(state, draft => {
-        const index = draft.data.findIndex(t => t._id === action.id);
-        draft.data.splice(index, 1);
-      });
     default:
       return state;
   }

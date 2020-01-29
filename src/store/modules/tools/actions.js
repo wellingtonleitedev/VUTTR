@@ -12,30 +12,16 @@ export function fetchToolsSuccess(data) {
   };
 }
 
-export function addToolRequest(tool) {
+export function addToolRequest(title, link, description, tags) {
   return {
     type: '@tool/ADD_REQUEST',
-    tool,
+    payload: { title, link, description, tags },
   };
 }
 
-export function addToolSuccess(tool) {
-  return {
-    type: '@tool/ADD_SUCCESS',
-    tool,
-  };
-}
-
-export function removeToolRequest(tool) {
+export function removeToolRequest(id, title) {
   return {
     type: '@tool/REMOVE_REQUEST',
-    tool,
-  };
-}
-
-export function removeToolSuccess(id) {
-  return {
-    type: '@tool/REMOVE_SUCCESS',
-    id,
+    payload: { id, title },
   };
 }

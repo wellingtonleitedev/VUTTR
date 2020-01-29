@@ -26,12 +26,14 @@ export default function Signin() {
         <Header />
         <Form ref={formRef} onSubmit={handleSubmit}>
           <InputLabel
+            required
             id="email"
             type="email"
             placeholder="Type your e-mail"
             onChange={email => setUser({ ...user, email })}
           />
           <InputLabel
+            required
             id="password"
             type="password"
             placeholder="Type your password"

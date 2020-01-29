@@ -21,8 +21,8 @@ export function AddFormModal() {
 
   const handleSubmit = async e => {
     e.preventDefault();
-
-    dispatch(addToolRequest(tool));
+    const { title, link, description, tags } = tool;
+    dispatch(addToolRequest(title, link, description, tags));
     dispatch(handleFormModal({}, false));
 
     formRef.current.reset();

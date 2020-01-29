@@ -20,33 +20,29 @@ export function* fetchTools({ payload }) {
   yield put(fetchToolsSuccess(data));
 }
 
-export function* addTool({ tool }) {
-  const { title, link, description, tags } = tool;
+export function* addTool({ payload }) {
+  const { title, link, description, tags } = payload;
+  try {
+    const { data } = yield call(api.post, '/tools', { title, link, description, tags });
 
-  if (!title || !link || !description || !tags || !tags.length) {
-    toastNewToolError('You need to fill in all the fields!', tool);
-  } else {
-    try {
-      const { data } = yield call(api.post, '/tools', tool);
+    yield put(fetchToolsSuccess(data));
 
-      yield put(addToolSuccess(data));
-
-      toastNewToolSuccess(`${data.title} has been successfully added!`, data);
-    } catch (err) {
-      toastError('There was a problem! Please, try later');
-    }
+    toastNewToolSuccess(`${payload.title} has been successfully added!`, payload);
+  } catch (err) {
+    toastError('There was a problem! Please, try later');
   }
 }
 
-export function* removeTool({ tool }) {
+export function* removeTool({ payload }) {
+  const { id, title, link, description, tags } = payload
   try {
-    yield call(api.delete, `/tools/${tool._id}`);
+    const { data } = yield call(api.delete, `/tools/${id}`);
 
-    yield put(removeToolSuccess(tool._id));
+    yield put(fetchToolsSuccess(data));
 
     toastRemovedToolSuccess(
-      `${tool.title} has been successfully removed!`,
-      tool
+      `${title} has been successfully removed!`,
+      payload
     );
   } catch (err) {
     toastError('There was a problem! Please, try later');

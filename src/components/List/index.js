@@ -18,7 +18,8 @@ export function List() {
   }, [dispatch]);
 
   const handleRemove = tool => {
-    dispatch(removeToolRequest(tool));
+    const { id, title, link, description, tags } = tool;
+    dispatch(removeToolRequest(id, title, link, description, tags));
   };
 
   return (

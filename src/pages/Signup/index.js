@@ -12,7 +12,8 @@ export default function Signup() {
 
   const signup = e => {
     e.preventDefault();
-    dispatch(signupRequest(user));
+    const { name, email, password } = user;
+    dispatch(signupRequest(name, email, password));
     setUser({});
     formRef.current.reset();
   };
@@ -23,18 +24,21 @@ export default function Signup() {
         <Header />
         <Form ref={formRef} onSubmit={signup}>
           <InputLabel
+            required
             id="name"
             type="text"
             placeholder="Type your name"
             onChange={name => setUser({ ...user, name })}
           />
           <InputLabel
+            required
             id="email"
             type="email"
             placeholder="Type your e-mail"
             onChange={email => setUser({ ...user, email })}
           />
           <InputLabel
+            required
             id="password"
             type="password"
             placeholder="Type your password"
