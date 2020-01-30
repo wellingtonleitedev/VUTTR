@@ -13,15 +13,16 @@ export function fetchToolsSuccess(data) {
 }
 
 export function addToolRequest(title, link, description, tags) {
+  console.log({ title, link, description, tags })
   return {
     type: '@tool/ADD_REQUEST',
     payload: { title, link, description, tags },
   };
 }
 
-export function removeToolRequest(id, title) {
+export function removeToolRequest(id, title, link, description, tags) {
   return {
     type: '@tool/REMOVE_REQUEST',
-    payload: { id, title },
+    payload: { id, title, link, description, tags },
   };
 }

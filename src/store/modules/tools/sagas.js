@@ -2,15 +2,12 @@
 import { call, put } from 'redux-saga/effects';
 import {
   toastNewToolSuccess,
-  toastNewToolError,
   toastRemovedToolSuccess,
   toastError,
 } from '../../../helpers';
 import api from '../../../services/api';
 import {
   fetchToolsSuccess,
-  addToolSuccess,
-  removeToolSuccess,
 } from './actions';
 
 export function* fetchTools({ payload }) {
@@ -29,12 +26,13 @@ export function* addTool({ payload }) {
 
     toastNewToolSuccess(`${payload.title} has been successfully added!`, payload);
   } catch (err) {
-    toastError('There was a problem! Please, try later');
+    const { data } = err.response
+    toastError(data.message);
   }
 }
 
 export function* removeTool({ payload }) {
-  const { id, title, link, description, tags } = payload
+  const { id, title } = payload
   try {
     const { data } = yield call(api.delete, `/tools/${id}`);
 
@@ -45,6 +43,7 @@ export function* removeTool({ payload }) {
       payload
     );
   } catch (err) {
-    toastError('There was a problem! Please, try later');
+    const { data } = err.response
+    toastError(data.message);
   }
 }
