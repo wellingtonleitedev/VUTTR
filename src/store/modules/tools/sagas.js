@@ -3,6 +3,7 @@ import { call, put } from 'redux-saga/effects';
 import {
   toastNewToolSuccess,
   toastRemovedToolSuccess,
+  toastNewToolError,
   toastError,
 } from '../../../helpers';
 import api from '../../../services/api';
@@ -27,7 +28,7 @@ export function* addTool({ payload }) {
     toastNewToolSuccess(`${payload.title} has been successfully added!`, payload);
   } catch (err) {
     const { data } = err.response
-    toastError(data.message);
+    toastNewToolError(data.message, payload);
   }
 }
 
