@@ -1,30 +1,27 @@
-export function handleModal(open) {
+export function handleModal(open = false) {
   return {
     type: '@modal/HANDLE_MODAL',
-    open,
+    payload: { open },
   };
 }
 
-export function handleFormModal(tool, open) {
+export function handleFormModal(tool = {}, open = false, tryAgain = false) {
   return {
     type: '@modal/HANDLE_FORM_MODAL',
-    tool,
-    open,
+    payload: { open, tool, tryAgain },
   };
 }
 
-export function handleViewModal(tool, open) {
+export function handleViewModal(tool = {}, open = false) {
   return {
     type: '@modal/HANDLE_VIEW_MODAL',
-    tool,
-    open,
+    payload: { open, tool },
   };
 }
 
-export function handleRemovedModal(tool, open) {
+export function handleRemovedModal(tool = {}, open = false) {
   return {
     type: '@modal/HANDLE_REMOVED_MODAL',
-    tool,
-    open,
+    payload: { open, tool },
   };
 }

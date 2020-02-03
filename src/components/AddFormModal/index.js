@@ -9,15 +9,16 @@ import { handleFormModal } from '../../store/modules/modal/actions';
 export function AddFormModal() {
   const formRef = useRef(null);
   const open = useSelector(state => state.modal.openForm);
+  const tryAgain = useSelector(state => state.modal.tryAgain);
   const value = useSelector(state => state.modal.tool);
   const dispatch = useDispatch();
   const [tool, setTool] = useState({});
 
   useMemo(() => {
-    if (value) {
+    if (value && tryAgain) {
       setTool(value);
     }
-  }, [value]);
+  }, [value, tryAgain]);
 
   const handleSubmit = async e => {
     e.preventDefault();
@@ -25,9 +26,8 @@ export function AddFormModal() {
     dispatch(addToolRequest(title, link, description, tags));
     dispatch(handleFormModal({}, false));
 
-    formRef.current.reset();
-
     setTool({});
+    formRef.current.reset();
   };
 
   return (
@@ -40,8 +40,9 @@ export function AddFormModal() {
         </ModalHeader>
       }
     >
-      <Form onSubmit={handleSubmit} ref={formRef}>
+      <Form ref={formRef}>
         <InputLabel
+          required
           value={tool.title}
           id="title"
           type="text"
@@ -58,6 +59,7 @@ export function AddFormModal() {
           Tool Link
         </InputLabel>
         <TextareaLabel
+          required
           value={tool.description}
           id="description"
           rows="5"
@@ -66,6 +68,7 @@ export function AddFormModal() {
           Tool Description
         </TextareaLabel>
         <InputTags
+          required
           id="tags"
           value={tool.tags}
           onChange={text => setTool({ ...tool, tags: text })}
@@ -73,7 +76,9 @@ export function AddFormModal() {
           Tool Tags
         </InputTags>
         <Actions>
-          <Button type="submit">Add Tool</Button>
+          <Button type="button" onClick={e => handleSubmit(e)}>
+            Add Tool
+          </Button>
         </Actions>
       </Form>
     </Modal>

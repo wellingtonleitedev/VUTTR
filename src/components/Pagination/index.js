@@ -20,6 +20,8 @@ export function Pagination() {
 
     initialValue = lastValue === pages ? lastValue - limit : initialValue;
 
+    initialValue = initialValue < 0 ? 0 : initialValue;
+
     const params = {
       initialValue,
       lastValue,
