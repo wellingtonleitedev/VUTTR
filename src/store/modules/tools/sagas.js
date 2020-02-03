@@ -7,44 +7,55 @@ import {
   toastError,
 } from '../../../helpers';
 import api from '../../../services/api';
-import {
-  fetchToolsSuccess,
-} from './actions';
+import { fetchToolsSuccess } from './actions';
+import session from '../../../services/session';
 
 export function* fetchTools({ payload }) {
   const { params } = payload;
 
-  const { data } = yield call(api.get, `/tools`, { params });
-  yield put(fetchToolsSuccess(data));
+  try {
+    const { data } = yield call(api.get, `/tools`, { params });
+    yield put(fetchToolsSuccess(data));
+  } catch (err) {
+    session(err);
+    toastError('you are probably not authorized');
+  }
 }
 
 export function* addTool({ payload }) {
   const { title, link, description, tags } = payload;
   try {
-    const { data } = yield call(api.post, '/tools', { title, link, description, tags });
+    const { data } = yield call(api.post, '/tools', {
+      title,
+      link,
+      description,
+      tags,
+    });
 
     yield put(fetchToolsSuccess(data));
 
-    toastNewToolSuccess(`${payload.title} has been successfully added!`, payload);
+    toastNewToolSuccess(
+      `${payload.title} has been successfully added!`,
+      payload
+    );
   } catch (err) {
-    const { data } = err.response
+    session(err);
+    const { data } = err.response;
     toastNewToolError(data.message, payload);
   }
 }
 
 export function* removeTool({ payload }) {
-  const { id, title } = payload
+  const { id, title } = payload;
   try {
     const { data } = yield call(api.delete, `/tools/${id}`);
 
     yield put(fetchToolsSuccess(data));
 
-    toastRemovedToolSuccess(
-      `${title} has been successfully removed!`,
-      payload
-    );
+    toastRemovedToolSuccess(`${title} has been successfully removed!`, payload);
   } catch (err) {
-    const { data } = err.response
+    session(err);
+    const { data } = err.response;
     toastError(data.message);
   }
 }

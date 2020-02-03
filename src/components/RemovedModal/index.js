@@ -30,7 +30,14 @@ export function RemovedModal() {
             tool.tags &&
             tool.tags.map((tag, index) => <Tag key={String(index)}>{tag}</Tag>)}
         </Tags>
-        <Button type="button" onClick={() => dispatch(addToolRequest(tool.title, tool.link, tool.description, tool.tags))}>
+        <Button
+          type="button"
+          onClick={() =>
+            dispatch(
+              addToolRequest(tool.title, tool.link, tool.description, tool.tags)
+            )
+          }
+        >
           Undo Remove
         </Button>
       </Content>

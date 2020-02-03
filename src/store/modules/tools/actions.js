@@ -8,12 +8,11 @@ export function fetchToolsRequest(params) {
 export function fetchToolsSuccess(data) {
   return {
     type: '@tool/FETCH_SUCCESS',
-    data,
+    payload: { data },
   };
 }
 
 export function addToolRequest(title, link, description, tags) {
-  console.log({ title, link, description, tags })
   return {
     type: '@tool/ADD_REQUEST',
     payload: { title, link, description, tags },
