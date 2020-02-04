@@ -2,7 +2,7 @@ import axios from 'axios';
 import { store } from '../store';
 
 const api = axios.create({
-  baseURL: 'https://vuttrapi.herokuapp.com:3000',
+  baseURL: 'https://vuttrapi.herokuapp.com',
 });
 
 api.interceptors.request.use(async config => {
