@@ -1,21 +1,22 @@
 import { produce } from 'immer';
 
-export default function modal(state = [], action) {
+export default function modal(state = {}, action) {
   switch (action.type) {
     case '@modal/HANDLE_FORM_MODAL':
       return produce(state, draft => {
-        draft.tool = action.tool;
-        draft.openForm = action.open;
+        draft.tool = action.payload.tool;
+        draft.openForm = action.payload.open;
+        draft.tryAgain = action.payload.tryAgain;
       });
     case '@modal/HANDLE_VIEW_MODAL':
       return produce(state, draft => {
-        draft.tool = action.tool;
-        draft.openView = action.open;
+        draft.tool = action.payload.tool;
+        draft.openView = action.payload.open;
       });
     case '@modal/HANDLE_REMOVED_MODAL':
       return produce(state, draft => {
-        draft.tool = action.tool;
-        draft.openRemoved = action.open;
+        draft.tool = action.payload.tool;
+        draft.openRemoved = action.payload.open;
       });
     default:
       return { ...state, openForm: false, openView: false, openRemoved: false };

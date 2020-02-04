@@ -14,10 +14,15 @@ export const Container = styled.div`
 export const Button = styled.button`
   background-color: transparent;
   border: 0;
+  font-weight: bold;
 
   svg {
     margin: 0 5px;
     vertical-align: middle;
+  }
+
+  &:not([disabled]) {
+    color: #fff;
   }
 `;
 

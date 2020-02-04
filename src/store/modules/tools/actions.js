@@ -8,7 +8,7 @@ export function fetchToolsRequest(params) {
 export function fetchToolsSuccess(data) {
   return {
     type: '@tool/FETCH_SUCCESS',
-    data,
+    payload: { data },
   };
 }
 
@@ -19,9 +19,9 @@ export function addToolRequest(title, link, description, tags) {
   };
 }
 
-export function removeToolRequest(id, title) {
+export function removeToolRequest(id, title, link, description, tags) {
   return {
     type: '@tool/REMOVE_REQUEST',
-    payload: { id, title },
+    payload: { id, title, link, description, tags },
   };
 }

@@ -28,7 +28,7 @@ export const toastError = text => {
 
 export const toastNewToolError = (text, tool) => {
   return toast.error(
-    <ToastContentError func="handleFormModal" params={[tool, true]}>
+    <ToastContentError func="handleFormModal" params={[tool, true, true]}>
       {text}
     </ToastContentError>
   );

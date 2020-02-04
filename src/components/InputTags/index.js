@@ -5,6 +5,10 @@ import { Container, Input, Tags, Tag } from './styles';
 
 export function InputTags({ value, onChange, children }) {
   const inputRef = useRef(null);
+  const [inputState, setInputState] = useState({
+    almostClean: false,
+    totalClean: true,
+  });
   const [tags, setTags] = useState([]);
 
   useCallback(() => {
@@ -20,6 +24,31 @@ export function InputTags({ value, onChange, children }) {
       setTags(value);
     }
   }, [value]);
+
+  const popForkey = array => {
+    if (inputRef.current.value) {
+      setInputState({ almostClean: false, totalClean: false });
+      return array;
+    }
+
+    if (!inputState.almostClean) {
+      setInputState({ ...inputState, almostClean: true });
+    } else {
+      setInputState({ almostClean: false, totalClean: true });
+      array.length === 1 ? (array = []) : array.pop(); //eslint-disable-line
+    }
+
+    return array;
+  };
+
+  const pushForKey = array => {
+    if (!inputRef.current.value) return array;
+
+    array.push(inputRef.current.value);
+    inputRef.current.value = '';
+
+    return array;
+  };
 
   const pushTags = text => {
     let tag;
@@ -38,10 +67,19 @@ export function InputTags({ value, onChange, children }) {
     }
   };
 
-  const handleRemoveForEvent = event => {
-    const array = tags;
+  const handleActionForEvent = event => {
+    let array = tags;
 
-    if (!inputRef.current.value && event.key === 'Backspace') array.pop();
+    switch (event.key) {
+      case 'Backspace':
+        array = popForkey(array);
+        break;
+      case 'Enter':
+        array = pushForKey(array);
+        break;
+      default:
+        return;
+    }
 
     setTags(array);
     onChange(tags);
@@ -50,7 +88,7 @@ export function InputTags({ value, onChange, children }) {
   const handleRemove = index => {
     const array = tags;
 
-    array.splice(index, 1);
+    array.splice(Number(index), 1);
     setTags(array);
     onChange(tags);
   };
@@ -72,7 +110,7 @@ export function InputTags({ value, onChange, children }) {
             <Input id="tags" type="hidden" onChange={text => onChange(text)} />
             <Input
               ref={inputRef}
-              onKeyUp={event => handleRemoveForEvent(event)}
+              onKeyUp={event => handleActionForEvent(event)}
               onChange={e => pushTags(e.target.value)}
             />
           </Tags>
