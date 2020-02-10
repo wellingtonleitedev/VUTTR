@@ -1,96 +1,54 @@
-import React, { useState, useRef, useMemo, useCallback } from 'react';
-import { FaTimes } from 'react-icons/fa';
+import React, { useState, useMemo } from 'react';
 import PropTypes from 'prop-types';
-import { Container, Input, Tags, Tag } from './styles';
+import 'antd/lib/icon/style/index.css';
+import Icon from 'antd/lib/icon';
+import { Container, InputNewTag, NewTag, Tag, Tags } from './styles';
 
 export function InputTags({ value, onChange, children }) {
-  const inputRef = useRef(null);
-  const [inputState, setInputState] = useState({
-    almostClean: false,
-    totalClean: true,
-  });
+  const [inputValue, setInputValue] = useState('');
+  const [showInput, setShowInput] = useState(false);
   const [tags, setTags] = useState([]);
 
-  useCallback(() => {
-    if (tags.length) {
-      onChange(tags);
-    }
-  }, [onChange, tags]);
-
   useMemo(() => {
-    if (!value.length) {
-      setTags([]);
-    } else {
-      setTags(value);
-    }
+    let array = [];
+
+    if (value.length) array = value;
+
+    setTags(array);
   }, [value]);
 
-  const popForkey = array => {
-    if (inputRef.current.value) {
-      setInputState({ almostClean: false, totalClean: false });
-      return array;
-    }
-
-    if (!inputState.almostClean) {
-      setInputState({ ...inputState, almostClean: true });
-    } else {
-      setInputState({ almostClean: false, totalClean: true });
-      array.length === 1 ? (array = []) : array.pop(); //eslint-disable-line
-    }
-
-    return array;
-  };
-
-  const pushForKey = array => {
-    if (!inputRef.current.value) return array;
-
-    array.push(inputRef.current.value);
-    inputRef.current.value = '';
-
-    return array;
-  };
-
-  const pushTags = text => {
-    let tag;
-
-    if (text.match(/^[,]/g) || text.match(/^[ ]/g)) {
-      inputRef.current.value = '';
-      return;
-    }
-
-    if (text.match(/[,]/g) || text.match(/[ ]/g)) {
-      tag = text.replace(' ', '');
-      tag = tag.replace(',', '');
-
-      inputRef.current.value = '';
-      setTags([...tags, tag]);
-    }
-  };
-
-  const handleActionForEvent = event => {
-    let array = tags;
-
-    switch (event.key) {
-      case 'Backspace':
-        array = popForkey(array);
-        break;
-      case 'Enter':
-        array = pushForKey(array);
-        break;
-      default:
-        return;
-    }
-
-    setTags(array);
-    onChange(tags);
-  };
-
-  const handleRemove = index => {
+  const handleRemove = key => {
     const array = tags;
 
-    array.splice(Number(index), 1);
-    setTags(array);
+    const newArray = array.filter((_, index) => key !== index);
+
+    setTags(newArray);
     onChange(tags);
+  };
+
+  const handleInputConfirm = () => {
+    const array = tags;
+
+    if (inputValue) array.push(inputValue);
+
+    setTags(array);
+    setInputValue('');
+    onChange(tags);
+  };
+
+  const handleInputBlur = () => {
+    const array = tags;
+
+    if (inputValue) array.push(inputValue);
+
+    setTags(array);
+    setShowInput(false);
+    setInputValue('');
+    onChange(tags);
+  };
+
+  const handleShowInput = () => {
+    setShowInput(true);
   };
 
   return (
@@ -98,21 +56,31 @@ export function InputTags({ value, onChange, children }) {
       <label htmlFor="tags">
         {children}
         <Container>
+          <input id="tags" type="hidden" onChange={text => onChange(text)} />
           <Tags>
             {tags.map((tag, index) => (
-              <Tag key={String(index)}>
-                <small>{tag}</small>
-                <button type="button" onClick={() => handleRemove(index)}>
-                  <FaTimes size={13} color="#FFF" />
-                </button>
+              <Tag
+                key={String(index)}
+                closable
+                onClose={() => handleRemove(index)}
+              >
+                {tag}
               </Tag>
             ))}
-            <Input id="tags" type="hidden" onChange={text => onChange(text)} />
-            <Input
-              ref={inputRef}
-              onKeyUp={event => handleActionForEvent(event)}
-              onChange={e => pushTags(e.target.value)}
-            />
+            {showInput ? (
+              <InputNewTag
+                type="text"
+                size="small"
+                value={inputValue}
+                onChange={e => setInputValue(e.target.value)}
+                onBlur={() => handleInputBlur()}
+                onPressEnter={() => handleInputConfirm()}
+              />
+            ) : (
+              <NewTag onClick={handleShowInput}>
+                <Icon type="plus" /> New Tag
+              </NewTag>
+            )}
           </Tags>
         </Container>
       </label>
