@@ -1,19 +1,34 @@
 import styled from 'styled-components';
+import 'antd/lib/tag/style/index.css';
+import Input from 'antd/lib/input';
+import AntdTag from 'antd/lib/tag';
 
 export const Container = styled.div`
   align-items: center;
   display: flex;
+
+  svg {
+    vertical-align: middle;
+  }
 `;
 
-export const Input = styled.input`
+export const NewTag = styled(AntdTag)`
+  background-color: #fff;
+  border-style: dashed;
+`;
+
+export const InputNewTag = styled(Input)`
   background-color: transparent;
-  border: 0;
-  flex: 1;
+  height: 18px;
   margin: 0 !important;
-  padding: 0 !important;
+  outline: auto;
+  outline-color: #365df0;
+  padding: 0 2px !important;
+  width: 78px;
 `;
 
 export const Tags = styled.ul`
+  align-items: center;
   background-color: #f5f4f6;
   border: 1px solid #ebeaed;
   border-radius: 5px;
@@ -24,24 +39,11 @@ export const Tags = styled.ul`
   padding: 5px;
 `;
 
-export const Tag = styled.li`
-  align-items: center;
-  background-color: #365df0;
-  border-radius: 5px;
-  color: #fff;
-  display: flex;
-  margin-bottom: 2px;
-  margin-right: 2px;
-  padding: 2px 10px;
+export const Tag = styled(AntdTag)`
+  background-color: #365df0 !important;
+  color: #fff !important;
 
-  button {
-    background: transparent;
-    margin: 0 !important;
-    padding: 0 !important;
-
-    svg {
-      margin-left: 5px;
-      vertical-align: middle;
-    }
+  svg {
+    color: #fff;
   }
 `;
