@@ -4,7 +4,7 @@ import { logoutRequest } from '../store/modules/auth/actions';
 import { toastError } from '../helpers';
 
 const api = axios.create({
-  baseURL: 'http://localhost:3000',
+  baseURL: 'https://vuttrapi.herokuapp.com',
 });
 
 api.interceptors.request.use(async config => {
@@ -23,7 +23,7 @@ api.interceptors.response.use(
   },
   error => {
     const { data } = error.response;
-
+    console.log(data);
     if (error.response.statusText === 'Unauthorized') {
       store.dispatch(logoutRequest());
       return toastError('you are probably not authorized');
