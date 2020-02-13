@@ -53,7 +53,7 @@ export function AddFormModal() {
         <InputLabel
           value={tool.link}
           id="link"
-          type="text"
+          type="url"
           onChange={text => setTool({ ...tool, link: text })}
         >
           Tool Link

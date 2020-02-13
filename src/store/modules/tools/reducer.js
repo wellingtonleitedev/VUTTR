@@ -5,6 +5,7 @@ const INITIAL_STATE = {
   data: [],
   pages: 1,
   page: 1,
+  total: 0,
 };
 
 export default function tools(state = INITIAL_STATE, action) {
@@ -14,6 +15,7 @@ export default function tools(state = INITIAL_STATE, action) {
         draft.data = action.payload.data.docs;
         draft.page = action.payload.data.page;
         draft.pages = action.payload.data.pages;
+        draft.total = action.payload.data.total;
       });
     default:
       return state;

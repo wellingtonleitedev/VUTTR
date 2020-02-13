@@ -9,6 +9,7 @@ export function Pagination() {
   const dispatch = useDispatch();
   const page = useSelector(state => Number(state.tools.page));
   const pages = useSelector(state => Number(state.tools.pages));
+  const total = useSelector(state => state.tools.total);
 
   const defineParams = () => {
     let limit = page > 10 ? 6 : 10;
@@ -54,36 +55,40 @@ export function Pagination() {
   };
 
   return (
-    <Container>
-      <Button
-        type="button"
-        disabled={page === 1}
-        onClick={() => handlePaginate(page - 1)}
-      >
-        <FaChevronLeft color="#fff" size={13} />
-        Anterior
-      </Button>
-      {page > 10 && (
-        <InitialPage onClick={() => handlePaginate(1)}>
-          <span>1</span>
-          <small>...</small>
-        </InitialPage>
+    <>
+      {!!total && (
+        <Container>
+          <Button
+            type="button"
+            disabled={page === 1}
+            onClick={() => handlePaginate(page - 1)}
+          >
+            <FaChevronLeft color="#fff" size={13} />
+            Anterior
+          </Button>
+          {page > 10 && (
+            <InitialPage onClick={() => handlePaginate(1)}>
+              <span>1</span>
+              <small>...</small>
+            </InitialPage>
+          )}
+          <List ref={ulRef}>{paginationItemsRender()}</List>
+          {page > 10 && defineParams().lastValue < pages && (
+            <LastPage onClick={() => handlePaginate(pages)}>
+              <small>...</small>
+              <span>{pages}</span>
+            </LastPage>
+          )}
+          <Button
+            type="button"
+            disabled={page === pages}
+            onClick={() => handlePaginate(page + 1)}
+          >
+            Próximo
+            <FaChevronRight color="#fff" size={13} />
+          </Button>
+        </Container>
       )}
-      <List ref={ulRef}>{paginationItemsRender()}</List>
-      {page > 10 && defineParams().lastValue < pages && (
-        <LastPage onClick={() => handlePaginate(pages)}>
-          <small>...</small>
-          <span>{pages}</span>
-        </LastPage>
-      )}
-      <Button
-        type="button"
-        disabled={page === pages}
-        onClick={() => handlePaginate(page + 1)}
-      >
-        Próximo
-        <FaChevronRight color="#fff" size={13} />
-      </Button>
-    </Container>
+    </>
   );
 }

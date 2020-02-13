@@ -1,9 +1,20 @@
 import styled from 'styled-components';
 
-export const Container = styled.ul`
+export const Container = styled.div`
   display: flex;
   flex-direction: column;
   padding: 40px 0;
+  width: 100%;
+`;
+
+export const NoRecords = styled.h3`
+  padding-top: 100px;
+  text-align: center;
+`;
+
+export const Content = styled.ul`
+  display: flex;
+  flex-direction: column;
   width: 100%;
 `;
 
