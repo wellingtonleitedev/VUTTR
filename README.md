@@ -16,19 +16,19 @@
 
 ## `Preparando o ambiente`
 
-### Executar Back-end
-O projeto necessita do download de uma API para ser executado por completo - [VUTTR API](https://github.com/Wellios/VUTTR-API)
+  **Executar Back-end**
+  O projeto necessita do download de uma API para ser executado por completo - [VUTTR API](https://github.com/Wellios/VUTTR-API)
 
-### Executar o Projeto
-Após clonar o Back-end do projeto, seguir os passos de iniciação da API e clonar este projeto no seu computador, você estará pronto para executar o projeto.
+  **Executar o Projeto**
+  Após clonar o Back-end do projeto, seguir os passos de iniciação da API e clonar este projeto no seu computador, você estará pronto     para executar o projeto.
 
-  - #### Baixar Dependências
+  - > **Baixar Dependências**
   Então após clonar o projeto, navegue até a pasta que você o clonou, abra o terminal e execute o comando `yarn` ou `npm install`, ou     abra o projeto em seu Editor de Texto ou IDE, e então no terminal execute o comando.
-  
-  - #### Executando
+
+  - > **Executando**
   Após o termino do download das dependências, você pode executar o comando `yarn start`, fique atento, pois, caso você não tenha         alterado a porta do Back-end, ele estará sendo executado também na porta `3000`, então irá aparecer a seguinte pergunta __"Would you     like to run the app on another port instead?"__, digite `y` e `Enter` para prosseguir.
-  
-  - #### Projeto em Execução
+
+  - > **Projeto em Execução**
    Pronto o projeto já pode ser utilizado. `Como Usar`
 
 ## `Como usar`
