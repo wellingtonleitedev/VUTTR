@@ -1,68 +1,37 @@
+# VUTTR Very Useful Tool to Remember
+
+> Este projeto é um desafio proposto pela [Bossabox](https://bossabox.com/para-empresas)
+
+## `Tecnologias utilizadas`
+- __axios:__ Fazer a comunição com o Back-end,
+- __react-router-dom:__ Criação de Rotas da aplicação,
+- __history:__ Auxiliar na navegação com a utilização do Redux Saga,
+- __prop-types:__ Definição de tipos das propriedades,
+- __react-icons:__ Utilização de icones na aplicação, de diferentes bibliotecas,
+- __react-toastify:__ Utilização de notificação via Toast, para melhor retorno de erros ou sucessos para o usuário,
+- __redux:__ Persistência dos estados da aplicação,
+- __redux-persist:__ Para que a persistência do estado não seja perdida após o reload do navegador,
+- __redux saga:__ Auxilio da comunicação de forma assíncrona do Back-end e persistência de estado da aplicação,
+- __styled-components:__ Criar componentes com estilos próprios,
+
+## `Preparando o ambiente`
+
+### Executar Back-end
+O projeto necessita do download de uma API para ser executado por completo - [VUTTR API](https://github.com/Wellios/VUTTR-API)
+
+### Executar o Projeto
+Após clonar o Back-end do projeto, seguir os passos de iniciação da API e clonar este projeto no seu computador, você estará pronto para executar o projeto.
+
+  - #### Baixar Dependências
+  Então após clonar o projeto, navegue até a pasta que você o clonou, abra o terminal e execute o comando `yarn` ou `npm install`, ou     abra o projeto em seu Editor de Texto ou IDE, e então no terminal execute o comando.
+  
+  - #### Executando
+  Após o termino do download das dependências, você pode executar o comando `yarn start`, fique atento, pois, caso você não tenha         alterado a porta do Back-end, ele estará sendo executado também na porta `3000`, então irá aparecer a seguinte pergunta __"Would you     like to run the app on another port instead?"__, digite `y` e `Enter` para prosseguir.
+  
+  - #### Projeto em Execução
+   Pronto o projeto já pode ser utilizado. `Como Usar`
+
+## `Como usar`
+...
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
-
-## Available Scripts
-
-In the project directory, you can run:
-
-### `yarn start`
-
-Runs the app in the development mode.<br />
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
-
-The page will reload if you make edits.<br />
-You will also see any lint errors in the console.
-
-### `yarn test`
-
-Launches the test runner in the interactive watch mode.<br />
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
-
-### `yarn build`
-
-Builds the app for production to the `build` folder.<br />
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.<br />
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `yarn eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (Webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/code-splitting
-
-### Analyzing the Bundle Size
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size
-
-### Making a Progressive Web App
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app
-
-### Advanced Configuration
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/advanced-configuration
-
-### Deployment
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/deployment
-
-### `yarn build` fails to minify
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
