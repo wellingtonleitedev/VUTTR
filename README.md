@@ -15,8 +15,8 @@
 - __styled-components:__ Criar componentes com estilos próprios,
 
 ## `Tecnologias utilizadas no Desenvolvimento`
-- _eslint:_ Padronizão e identação de código,
-- _prettier:_ Auxilia o eslint na formatação do código, mantendo sempre o padrão,
+- __eslint:__ Padronizão e identação de código,
+- __prettier:__ Auxilia o eslint na formatação do código, mantendo sempre o padrão,
 
 ## `Preparando o ambiente`
 
