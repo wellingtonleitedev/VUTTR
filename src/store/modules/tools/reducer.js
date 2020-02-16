@@ -11,10 +11,6 @@ const INITIAL_STATE = {
 
 export default function tools(state = INITIAL_STATE, action) {
   switch (action.type) {
-    case '@tool/FETCH_REQUEST':
-      return produce(state, draft => {
-        draft.loading = true;
-      });
     case '@tool/ADD_REQUEST':
       return produce(state, draft => {
         draft.loading = true;

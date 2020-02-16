@@ -23,6 +23,7 @@ export function* addTool({ payload }) {
   const { title, link, description, tags } = payload;
 
   if (!title || !description || !(tags && tags.length)) {
+    yield put(actionFailure());
     toastNewToolError('You need to fill all required fiels', payload);
     return;
   }
@@ -49,6 +50,7 @@ export function* updateTool({ payload }) {
   const { id, title, link, description, tags } = payload;
 
   if (!title || !description || !(tags && tags.length)) {
+    yield put(actionFailure());
     toastNewToolError('You need to fill all required fiels', payload);
     return;
   }
