@@ -20,10 +20,10 @@
 
 ## `Preparando o ambiente`
 
-  **Executar Back-end**
+  ### Executar Back-end
   O projeto necessita do download de uma API para ser executado por completo - [VUTTR API](https://github.com/Wellios/VUTTR-API)
 
-  **Executar o Projeto**
+  ### Executar o Projeto
   Após clonar o Back-end do projeto, seguir os passos de iniciação da API e clonar este projeto no seu computador, você estará pronto     para executar o projeto.
 
   - > **Baixar Dependências:**
