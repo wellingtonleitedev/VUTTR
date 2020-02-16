@@ -7,6 +7,7 @@ export * from './InputLabel';
 export * from './InputTags';
 export * from './TextareaLabel';
 export * from './List';
+export * from './Loading';
 export * from './Modal';
 export * from './RemovedModal';
 export * from './InputSearch';

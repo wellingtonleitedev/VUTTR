@@ -23,28 +23,28 @@ export function InputTags({ value, onChange, children }) {
     const newArray = array.filter((_, index) => key !== index);
 
     setTags(newArray);
-    onChange(tags);
+    onChange(newArray);
   };
 
   const handleInputConfirm = () => {
-    const array = tags;
+    let array = tags;
 
-    if (inputValue) array.push(inputValue);
+    if (inputValue) array = [...array, inputValue];
 
     setTags(array);
     setInputValue('');
-    onChange(tags);
+    onChange(array);
   };
 
   const handleInputBlur = () => {
-    const array = tags;
+    let array = tags;
 
-    if (inputValue) array.push(inputValue);
+    if (inputValue) array = [...array, inputValue];
 
     setTags(array);
     setShowInput(false);
     setInputValue('');
-    onChange(tags);
+    onChange(array);
   };
 
   const handleShowInput = () => {

@@ -5,10 +5,15 @@ export function handleModal(open = false) {
   };
 }
 
-export function handleFormModal(tool = {}, open = false, tryAgain = false) {
+export function handleFormModal(
+  tool = {},
+  open = false,
+  tryAgain = false,
+  isUpdate = false
+) {
   return {
     type: '@modal/HANDLE_FORM_MODAL',
-    payload: { open, tool, tryAgain },
+    payload: { open, tool, tryAgain, isUpdate },
   };
 }
 

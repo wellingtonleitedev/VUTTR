@@ -49,6 +49,19 @@ export const Global = createGlobalStyle`
     border-radius: 5px !important;
     padding: 15px;
   }
+
+  .pulse {
+    animation: pulse 1s steps(8) infinite;
+  }
+
+  @keyframes pulse {
+    0% {
+      transform: rotate(0deg);
+    }
+    100% {
+      transform: rotate(1turn);
+    }
+  }
 `;
 
 export const Container = styled.div`

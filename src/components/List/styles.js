@@ -30,6 +30,12 @@ export const Item = styled.li`
   width: 100%;
 `;
 
+export const Buttons = styled.div`
+  button {
+    margin-left: 5px;
+  }
+`;
+
 export const HeaderList = styled.div`
   display: flex;
   justify-content: space-between;

@@ -1,5 +1,6 @@
 import React, { useState, useRef } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import { FaSpinner } from 'react-icons/fa';
 import { Container } from '../../style/global';
 import { Content, Form, Button, Redirect } from './styles';
 import { InputLabel, Header } from '../../components';
@@ -7,6 +8,7 @@ import { signinRequest } from '../../store/modules/auth/actions';
 
 export default function Signin() {
   const [user, setUser] = useState({});
+  const loading = useSelector(state => state.auth.loading);
   const dispatch = useDispatch();
   const formRef = useRef();
 
@@ -39,7 +41,13 @@ export default function Signin() {
             placeholder="Type your password"
             onChange={password => setUser({ ...user, password })}
           />
-          <Button>SIGN IN</Button>
+          <Button>
+            {loading ? (
+              <FaSpinner className="pulse" size={15} color="#FFF" />
+            ) : (
+              `SIGN IN`
+            )}
+          </Button>
           <Redirect to="/signup">Don&apos;t have an account? Sign up</Redirect>
         </Form>
       </Content>

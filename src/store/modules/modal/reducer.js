@@ -6,6 +6,7 @@ export default function modal(state = {}, action) {
       return produce(state, draft => {
         draft.tool = action.payload.tool;
         draft.openForm = action.payload.open;
+        draft.isUpdate = action.payload.isUpdate;
         draft.tryAgain = action.payload.tryAgain;
       });
     case '@modal/HANDLE_VIEW_MODAL':

@@ -30,3 +30,9 @@ export function logoutSuccess() {
     type: '@auth/LOGOUT_SUCCESS',
   };
 }
+
+export function authFailure() {
+  return {
+    type: '@auth/FAILURE',
+  };
+}

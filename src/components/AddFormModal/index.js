@@ -1,30 +1,40 @@
 import React, { useState, useRef, useMemo } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { FaPlus } from 'react-icons/fa';
+import { FaPlus, FaPencilAlt } from 'react-icons/fa';
 import { ModalHeader, Form, Actions, Button } from './styles';
 import { InputLabel, InputTags, TextareaLabel, Modal } from '..';
-import { addToolRequest } from '../../store/modules/tools/actions';
+import {
+  addToolRequest,
+  updateToolRequest,
+} from '../../store/modules/tools/actions';
 import { handleFormModal } from '../../store/modules/modal/actions';
 
 export function AddFormModal() {
   const formRef = useRef(null);
   const open = useSelector(state => state.modal.openForm);
   const tryAgain = useSelector(state => state.modal.tryAgain);
+  const isUpdate = useSelector(state => state.modal.isUpdate);
   const value = useSelector(state => state.modal.tool);
   const dispatch = useDispatch();
   const [tool, setTool] = useState({});
 
   useMemo(() => {
-    if (value && tryAgain) {
+    if ((value && tryAgain) || (value && isUpdate)) {
       setTool(value);
     }
-  }, [value, tryAgain]);
+  }, [value, tryAgain, isUpdate]);
 
   const handleSubmit = async e => {
     e.preventDefault();
-    const { title, link, description, tags } = tool;
-    dispatch(addToolRequest(title, link, description, tags));
-    dispatch(handleFormModal({}, false));
+    const { _id, title, link, description, tags } = tool;
+
+    if (isUpdate) {
+      dispatch(updateToolRequest(_id, title, link, description, tags));
+    } else {
+      dispatch(addToolRequest(title, link, description, tags));
+    }
+
+    dispatch(handleFormModal());
 
     setTool({});
     formRef.current.reset();
@@ -34,10 +44,17 @@ export function AddFormModal() {
     <Modal
       open={open}
       header={
-        <ModalHeader>
-          <FaPlus color="#365df0" size={15} />
-          <h3>Add new tool</h3>
-        </ModalHeader>
+        isUpdate ? (
+          <ModalHeader>
+            <FaPencilAlt color="#365df0" size={15} />
+            <h3>Update tool</h3>
+          </ModalHeader>
+        ) : (
+          <ModalHeader>
+            <FaPlus color="#365df0" size={15} />
+            <h3>Add new tool</h3>
+          </ModalHeader>
+        )
       }
     >
       <Form ref={formRef}>
@@ -77,7 +94,7 @@ export function AddFormModal() {
         </InputTags>
         <Actions>
           <Button type="button" onClick={e => handleSubmit(e)}>
-            Add Tool
+            {isUpdate ? `Update Tool` : `Add Tool`}
           </Button>
         </Actions>
       </Form>

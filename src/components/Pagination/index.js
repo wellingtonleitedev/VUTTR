@@ -10,6 +10,7 @@ export function Pagination() {
   const page = useSelector(state => Number(state.tools.page));
   const pages = useSelector(state => Number(state.tools.pages));
   const total = useSelector(state => state.tools.total);
+  const limitItens = useSelector(state => state.tools.limit);
 
   const defineParams = () => {
     let limit = page > 10 ? 6 : 10;
@@ -56,7 +57,7 @@ export function Pagination() {
 
   return (
     <>
-      {!!total && (
+      {total > limitItens && (
         <Container>
           <Button
             type="button"
