@@ -1,8 +1,8 @@
-# VUTTR Very Useful Tool to Remember
+# VUTTR (Front-end) - Very Useful Tool to Remember
 
 > Este projeto é um desafio proposto pela [Bossabox](https://bossabox.com/para-empresas)
 
-## `Tecnologias utilizadas`
+## `Tecnologias utilizadas na Aplicação`
 - __axios:__ Fazer a comunição com o Back-end,
 - __react-router-dom:__ Criação de Rotas da aplicação,
 - __history:__ Auxiliar na navegação com a utilização do Redux Saga,
@@ -13,6 +13,10 @@
 - __redux-persist:__ Para que a persistência do estado não seja perdida após o reload do navegador,
 - __redux saga:__ Auxilio da comunicação de forma assíncrona do Back-end e persistência de estado da aplicação,
 - __styled-components:__ Criar componentes com estilos próprios,
+
+## `Tecnologias utilizadas no Desenvolvimento`
+- _eslint:_ Padronizão e identação de código,
+- _prettier:_ Auxilia o eslint na formatação do código, mantendo sempre o padrão,
 
 ## `Preparando o ambiente`
 
