@@ -36,6 +36,29 @@
    Pronto o projeto já pode ser utilizado.
 
 ## `Como usar`
-...
+
+#### Criar um usuário
+![signup](https://user-images.githubusercontent.com/42186618/74619791-896ce680-5115-11ea-97f4-86d447afdd7a.gif)
+
+#### Fazer Login
+![signin](https://user-images.githubusercontent.com/42186618/74619860-c6d17400-5115-11ea-801d-8229d35e5dfa.gif)
+
+#### Adicionar uma nova ferramenta
+![add_tool](https://user-images.githubusercontent.com/42186618/74619877-d05adc00-5115-11ea-93bf-994b7143beae.gif)
+
+#### Atualizar ferramenta
+![update_tool](https://user-images.githubusercontent.com/42186618/74619887-dcdf3480-5115-11ea-85e9-ef5cbf20a55b.gif)
+
+#### Remover e Desafazer a remoção da ferramenta
+![undo_remove](https://user-images.githubusercontent.com/42186618/74619905-f1233180-5115-11ea-86b9-cd988a23884e.gif)
+
+#### Pesquisar
+![search](https://user-images.githubusercontent.com/42186618/74619923-039d6b00-5116-11ea-9681-43c6e99025e7.gif)
+
+#### Pesquisar apenas por tags
+![search_tags](https://user-images.githubusercontent.com/42186618/74619939-13b54a80-5116-11ea-9dae-4977ffe180b0.gif)
+
+#### Clicar no link da ferramenta
+![click_on_link](https://user-images.githubusercontent.com/42186618/74619944-19ab2b80-5116-11ea-80d0-6db10cc0f5dc.gif)
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
