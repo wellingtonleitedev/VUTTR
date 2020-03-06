@@ -1,5 +1,12 @@
-import styled from 'styled-components';
-import { Link } from 'react-router-dom';
+import React from "react";
+import styled from "styled-components";
+import { Link } from "react-router-dom";
+
+interface Props {
+  onSubmit: Function;
+  children?: JSX.Element;
+  ref: React.FC;
+}
 
 export const Content = styled.main`
   max-width: 400px;

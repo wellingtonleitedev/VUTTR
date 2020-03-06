@@ -1,16 +1,16 @@
-import React from 'react';
-import { Container } from '../../style/global';
-import { Content } from './styles';
+import React from "react";
+import { Container } from "../../style/global";
+import { Content } from "./styles";
 import {
   HeaderActions,
   List,
   AddFormModal,
   ViewModal,
   RemovedModal,
-  Pagination,
-} from '../../components';
+  Pagination
+} from "../../components";
 
-export default function Main() {
+export const Main: React.FC = () => {
   return (
     <Container>
       <Content>
@@ -23,4 +23,4 @@ export default function Main() {
       <RemovedModal />
     </Container>
   );
-}
+};

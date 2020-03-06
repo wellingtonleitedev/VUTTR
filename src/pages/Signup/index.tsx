@@ -1,23 +1,21 @@
-import React, { useState, useRef } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { FaSpinner } from 'react-icons/fa';
-import { Container } from '../../style/global';
-import { Content, Form, Button, Redirect } from './styles';
-import { InputLabel, Header } from '../../components';
-import { signinRequest } from '../../store/modules/auth/actions';
+import React, { useState, useRef } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { FaSpinner } from "react-icons/fa";
+import { Container } from "../../style/global";
+import { Content, Form, Button, Redirect } from "./styles";
+import { InputLabel, Header } from "../../components";
+import { signupRequest } from "../../store/modules/auth/actions";
 
-export default function Signin() {
+export const Signup: React.FC = () => {
   const [user, setUser] = useState({});
   const loading = useSelector(state => state.auth.loading);
   const dispatch = useDispatch();
   const formRef = useRef();
 
-  const handleSubmit = e => {
+  const signup = e => {
     e.preventDefault();
-
-    const { email, password } = user;
-
-    dispatch(signinRequest(email, password));
+    const { name, email, password } = user;
+    dispatch(signupRequest(name, email, password));
     setUser({});
     formRef.current.reset();
   };
@@ -26,7 +24,14 @@ export default function Signin() {
     <Container>
       <Content>
         <Header />
-        <Form ref={formRef} onSubmit={handleSubmit}>
+        <Form ref={formRef} onSubmit={signup}>
+          <InputLabel
+            required
+            id="name"
+            type="text"
+            placeholder="Type your name"
+            onChange={name => setUser({ ...user, name })}
+          />
           <InputLabel
             required
             id="email"
@@ -45,12 +50,12 @@ export default function Signin() {
             {loading ? (
               <FaSpinner className="pulse" size={15} color="#FFF" />
             ) : (
-              `SIGN IN`
+              `SIGN UP`
             )}
           </Button>
-          <Redirect to="/signup">Don&apos;t have an account? Sign up</Redirect>
+          <Redirect to="/">Already have an account? Sign in</Redirect>
         </Form>
       </Content>
     </Container>
   );
-}
+};
